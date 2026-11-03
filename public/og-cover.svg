@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A1A3A"/>
+      <stop offset="0.55" stop-color="#12306B"/>
+      <stop offset="1" stop-color="#0A1A3A"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.72" cy="0.3" r="0.65">
+      <stop offset="0" stop-color="#C9A24B" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#C9A24B" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#E8D6A0" stroke-opacity="0.09"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g fill="none" stroke="#E8D6A0" stroke-opacity="0.35">
+    <circle cx="930" cy="300" r="190"/>
+    <ellipse cx="930" cy="300" rx="190" ry="72"/>
+    <ellipse cx="930" cy="300" rx="72" ry="190"/>
+  </g>
+  <g fill="#C9A24B">
+    <circle cx="860" cy="230" r="7"/><circle cx="1010" cy="360" r="5"/><circle cx="980" cy="170" r="4"/>
+  </g>
+  <text x="84" y="120" font-family="JetBrains Mono, monospace" font-size="18" letter-spacing="6" fill="#C9A24B">GLOBAL ADVISORY · EST. 2011</text>
+  <text x="80" y="300" font-family="Playfair Display, Georgia, serif" font-size="104" fill="#F7F5EF">RNS Global</text>
+  <text x="84" y="368" font-family="Inter, sans-serif" font-size="30" fill="#E8D6A0">Expertise Without Borders.</text>
+  <text x="84" y="440" font-family="Inter, sans-serif" font-size="21" fill="#F7F5EF" opacity="0.72">Education · Travel · Business · Finance · Legal · Technology</text>
+  <line x1="84" y1="500" x2="620" y2="500" stroke="#C9A24B" stroke-width="1"/>
+  <text x="84" y="548" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="2" fill="#F7F5EF" opacity="0.75">DUBAI · RIYADH · MUMBAI · LAHORE · LONDON · FRANKFURT · TALLINN · NEW YORK</text>
+</svg>
