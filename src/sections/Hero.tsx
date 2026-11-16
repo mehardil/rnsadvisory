@@ -3,7 +3,8 @@ import { ArrowDown, ArrowRight, CalendarCheck, Star } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import siteConfig from '@/config/siteConfig'
 import ArtFrame from '@/components/ArtFrame'
-import { ButtonLink } from '@/components/Button'
+import { ButtonAnchor, ButtonLink } from '@/components/Button'
+import { consultationLink } from '@/utils/links'
 import Reveal from '@/components/Reveal'
 import { useIsLowEnd } from '@/hooks/useMediaQuery'
 
@@ -15,16 +16,18 @@ export default function Hero() {
 
   return (
     <section className="relative isolate min-h-[100svh] overflow-hidden bg-navy text-ivory">
-      <ArtFrame
-        seed="home-hero-aurora"
-        imageKey="home-hero-aurora"
-        style="aurora"
-        alt=""
-        animate={false}
-        priority
-        rounded="rounded-none"
-        className="absolute inset-0 h-full w-full opacity-35"
-      />
+      {!lowEnd && (
+        <ArtFrame
+          seed="home-hero-aurora"
+          imageKey="home-hero-aurora"
+          style="aurora"
+          alt=""
+          animate={false}
+          priority
+          rounded="rounded-none"
+          className="absolute inset-0 h-full w-full opacity-35"
+        />
+      )}
 
       {!lowEnd && (
         <div className="absolute inset-0 md:left-[32%]">
@@ -41,6 +44,7 @@ export default function Hero() {
           style="crystals"
           alt=""
           animate={false}
+          priority
           rounded="rounded-none"
           className="absolute inset-0 h-full w-full opacity-45 md:left-[40%]"
         />
@@ -87,20 +91,34 @@ export default function Hero() {
               </h1>
             </Reveal>
 
-            <Reveal delay={0.16}>
-              <p className="mt-8 max-w-xl text-[0.98rem] leading-relaxed text-ivory/65 md:text-[1.08rem]">
+            <Reveal delay={0.13}>
+              <p className="mt-5 inline-flex items-center gap-3 text-[0.92rem] font-medium leading-snug text-softgold md:text-[1.02rem]">
+                <span className="h-px w-8 shrink-0 bg-gold/70" aria-hidden="true" />
+                {t('hero.promise')}
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.18}>
+              <p className="mt-5 max-w-xl text-[0.98rem] leading-relaxed text-ivory/65 md:text-[1.08rem]">
                 {t('hero.subline')}
               </p>
             </Reveal>
 
             <Reveal delay={0.24}>
               <div className="mt-9 flex flex-wrap items-center gap-3">
-                <ButtonLink to="/services" variant="gold" size="lg">
+                <ButtonLink to="/services" variant="gold" size="lg" className="w-full justify-center sm:w-auto">
                   {t('cta.explore')} <ArrowRight size={16} />
                 </ButtonLink>
-                <ButtonLink to={siteConfig.links.book} variant="light" size="lg">
-                  <CalendarCheck size={16} /> {t('cta.bookShort')}
-                </ButtonLink>
+                <ButtonAnchor
+                  href={consultationLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="light"
+                  size="lg"
+                  className="w-full justify-center sm:w-auto"
+                >
+                  <CalendarCheck size={16} /> {t('cta.book')}
+                </ButtonAnchor>
               </div>
             </Reveal>
 

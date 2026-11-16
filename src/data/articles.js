@@ -1,5 +1,5 @@
 /**
- * Insights — nine original articles written for RNS Global.
+ * Insights — nine original articles written for RNS Global Partners.
  * Article bodies are structured blocks so the page can build a table of contents,
  * reading progress and related-post logic without a markdown dependency.
  */
@@ -9,7 +9,7 @@ export const authors = {
     name: 'Amara Siddiqui',
     role: 'Head of Immigration',
     initials: 'AS',
-    bio: 'Leads UAE and Saudi immigration at RNS Global. Fifteen years advising founders, families and employers on residency strategy.',
+    bio: 'Leads UAE and Saudi immigration at RNS Global Partners. Fifteen years advising founders, families and employers on residency strategy.',
   },
   daniel: {
     name: 'Daniel Okoye',

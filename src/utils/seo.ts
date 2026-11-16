@@ -58,7 +58,6 @@ export const serviceJsonLd = (svc: {
   title: string
   overview: string
   path: string
-  priceFrom: number
   categoryTitle: string
 }) => ({
   '@context': 'https://schema.org',
@@ -73,12 +72,6 @@ export const serviceJsonLd = (svc: {
     url: base,
   },
   areaServed: ['AE', 'SA', 'IN', 'PK', 'GB', 'EE', 'US', 'DE'],
-  offers: {
-    '@type': 'Offer',
-    priceCurrency: 'USD',
-    price: svc.priceFrom,
-    availability: 'https://schema.org/InStock',
-  },
 })
 
 export const faqJsonLd = (faqs: { q: string; a: string }[]) => ({

@@ -56,6 +56,7 @@ export default function Tools() {
                           animate={false}
                           rounded="rounded-none"
                           className="h-full w-full transition-transform duration-700 group-hover:scale-105"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                         <span className="absolute right-4 top-4 rounded-full bg-navy/60 px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.12em] text-softgold backdrop-blur">
                           {tool.tag}

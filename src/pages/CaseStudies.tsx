@@ -28,7 +28,7 @@ export default function CaseStudies() {
     <>
       <Seo
         title="Case studies — measured outcomes"
-        description="Before-and-after results from RNS Global engagements: UAE licensing, Estonia student pathways, Jebel Ali fulfilment, family succession, Golden Visas and Saudi market entry."
+        description="Before-and-after results from RNS Global Partners engagements: UAE licensing, Estonia student pathways, Jebel Ali fulfilment, family succession, Golden Visas and Saudi market entry."
         path="/case-studies"
         jsonLd={[
           organizationJsonLd(),

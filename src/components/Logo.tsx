@@ -31,11 +31,12 @@ export default function Logo({ className, tone = 'light', compact = false, linke
       </svg>
       {!compact && (
         <span className="flex flex-col leading-none">
-          <span className="font-display text-[1.18rem] font-medium tracking-[-0.02em]">
+          <span className="whitespace-nowrap font-display text-[1.1rem] font-medium tracking-[-0.03em]">
             {siteConfig.brand.name}
           </span>
-          <span className="mt-1 font-mono text-[8px] uppercase tracking-[0.3em] text-gold">
-            Global Advisory
+          <span className="mt-1.5 flex items-center gap-1.5 font-mono text-[7.5px] uppercase tracking-[0.3em] text-gold">
+            <span className="h-px w-3 bg-gold/60" />
+            Since 2011
           </span>
         </span>
       )}

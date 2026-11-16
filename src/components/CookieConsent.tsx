@@ -30,19 +30,19 @@ export default function CookieConsent() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 24 }}
           transition={{ duration: 0.35 }}
-          className="fixed bottom-[4.6rem] left-3 right-3 z-[115] md:bottom-6 md:left-6 md:right-auto md:max-w-[390px]"
+          className="fixed bottom-[4.75rem] left-3 right-3 z-[115] md:bottom-6 md:left-6 md:right-auto md:max-w-[390px]"
           role="region"
           aria-label="Cookie preferences"
         >
           <div className="card overflow-hidden rounded-2xl border-gold/25 shadow-lift">
-            <div className="flex items-start gap-3 p-4 md:p-5">
-              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/12 text-gold-ink">
+            <div className="flex items-start gap-2.5 p-3 md:gap-3 md:p-5">
+              <span className="mt-0.5 hidden h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/12 text-gold-ink sm:flex">
                 <Cookie size={17} />
               </span>
               <div className="min-w-0">
-                <p className="font-display text-[1rem] leading-tight text-ink">We keep cookies simple</p>
-                <p className="mt-1 line-clamp-2 text-[0.7rem] leading-relaxed text-muted md:line-clamp-none">
-                  Essential cookies keep the site working. Analytics and marketing load only with your permission.
+                <p className="font-display text-[0.95rem] leading-tight text-ink md:text-[1rem]">We keep cookies simple</p>
+                <p className="mt-0.5 text-[0.66rem] leading-relaxed text-muted md:mt-1 md:text-[0.7rem]">
+                  Essential only. Analytics loads with your permission.
                 </p>
               </div>
               <button
@@ -90,7 +90,7 @@ export default function CookieConsent() {
               )}
             </AnimatePresence>
 
-            <div className="flex flex-wrap items-center gap-1.5 border-t border-[color:var(--hair)] bg-[color:var(--surface-2)] px-4 py-3">
+            <div className="flex flex-wrap items-center gap-1.5 border-t border-[color:var(--hair)] bg-[color:var(--surface-2)] px-3 py-2.5 md:px-4 md:py-3">
               <Button size="sm" variant="gold" onClick={() => decide({ analytics: true, marketing: true })}>
                 Accept all
               </Button>
@@ -105,7 +105,7 @@ export default function CookieConsent() {
                 <button
                   type="button"
                   onClick={() => setShowPrefs(true)}
-                  className={cn('inline-flex items-center gap-1.5 text-[0.72rem] font-semibold text-muted hover:text-ink')}
+                  className={cn('inline-flex items-center gap-1.5 text-[0.68rem] font-semibold text-muted hover:text-ink md:text-[0.72rem]')}
                 >
                   <Settings2 size={13} /> Preferences
                 </button>

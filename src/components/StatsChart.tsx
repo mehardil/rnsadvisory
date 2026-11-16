@@ -1,14 +1,3 @@
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts'
-
 const data = [
   { name: 'Immigration', value: 92 },
   { name: 'Business', value: 78 },
@@ -19,47 +8,43 @@ const data = [
   { name: 'Legal', value: 29 },
 ]
 
-const colors = ['#C9A24B', '#D8B263', '#1F4FD8', '#3C67DE', '#5B6B86', '#8493A9', '#A9B6CC']
+const barClass = [
+  'bg-gradient-to-r from-[#E8D6A0] to-[#C9A24B]',
+  'bg-gradient-to-r from-[#E3C987] to-[#C9A24B]',
+  'bg-[#1F4FD8]',
+  'bg-[#3C67DE]',
+  'bg-[#5B6B86]',
+  'bg-[#8493A9]',
+  'bg-[#A9B6CC]',
+]
 
+/** Lightweight bar chart — no charting library, readable at 320px. */
 export default function StatsChart() {
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <BarChart data={data} margin={{ top: 8, right: 4, left: -22, bottom: 0 }} barCategoryGap="26%">
-        <defs>
-          <linearGradient id="barGold" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#E8D6A0" />
-            <stop offset="100%" stopColor="#C9A24B" />
-          </linearGradient>
-        </defs>
-        <CartesianGrid strokeDasharray="3 5" stroke="rgba(91,107,134,0.18)" vertical={false} />
-        <XAxis
-          dataKey="name"
-          tick={{ fontSize: 9, fill: '#8493a9', fontFamily: 'JetBrains Mono, monospace' }}
-          axisLine={false}
-          tickLine={false}
-          interval={0}
-          angle={-18}
-          textAnchor="end"
-          height={45}
-        />
-        <YAxis hide domain={[0, 100]} />
-        <Tooltip
-          cursor={{ fill: 'rgba(201,162,75,0.08)' }}
-          contentStyle={{
-            background: '#0A1A3A',
-            border: '1px solid rgba(232,214,160,0.25)',
-            borderRadius: 8,
-            fontSize: 11,
-            color: '#F7F5EF',
-          }}
-          formatter={(value: number) => [`${value} engagements`, 'Demand index']}
-        />
-        <Bar dataKey="value" radius={[5, 5, 0, 0]} isAnimationActive animationDuration={1200}>
-          {data.map((entry, index) => (
-            <Cell key={entry.name} fill={index < 2 ? 'url(#barGold)' : colors[index]} fillOpacity={index < 2 ? 1 : 0.72} />
-          ))}
-        </Bar>
-      </BarChart>
-    </ResponsiveContainer>
+    <div
+      className="flex h-full flex-col justify-center gap-2"
+      role="img"
+      aria-label="Client demand index by practice: Immigration 92, Business 78, Education 71, Finance 54, Trade 43, Technology 37, Legal 29."
+    >
+      {data.map((item, index) => (
+        <div
+          key={item.name}
+          className="grid grid-cols-[68px_minmax(0,1fr)_26px] items-center gap-2 sm:grid-cols-[92px_minmax(0,1fr)_30px]"
+          title={`${item.name}: ${item.value} engagements (demand index)`}
+        >
+          <span className="truncate font-mono text-[8px] uppercase tracking-[0.1em] text-faint sm:text-[9px]">
+            {item.name}
+          </span>
+          <span className="h-2 overflow-hidden rounded-full bg-[color:var(--hair)]">
+            <span
+              className={`block h-full rounded-full ${barClass[index]}`}
+              style={{ width: `${item.value}%`, opacity: index < 4 ? 1 : 0.82 }}
+            />
+          </span>
+          <span className="text-right font-mono text-[9px] text-muted sm:text-[10px]">{item.value}</span>
+        </div>
+      ))}
+      <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.12em] text-faint">Demand index · out of 100</p>
+    </div>
   )
 }

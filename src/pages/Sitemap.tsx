@@ -14,7 +14,7 @@ export default function Sitemap() {
     <>
       <Seo
         title="Sitemap"
-        description="Every page, service, industry, insight, tool and legal document on the RNS Global website."
+        description="Every page, service, industry, insight, tool and legal document on the RNS Global Partners website."
         path="/sitemap"
         jsonLd={[
           breadcrumbJsonLd([

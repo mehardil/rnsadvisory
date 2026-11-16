@@ -1,5 +1,5 @@
 /**
- * Service catalogue — the heart of RNS Global.
+ * Service catalogue — the heart of RNS Global Partners.
  * Every category and service page is generated from this file. To add a service,
  * append an object to the relevant category and it appears automatically in the
  * mega menu, services grid, search, sitemap and related-service rails.
@@ -100,7 +100,6 @@ function buildPackages(service) {
 
 function makeService(categoryId, data) {
   const processKey = categoryProcessKey[categoryId]
-  const price = data.priceFrom
   return {
     ...data,
     categoryId,
@@ -117,8 +116,8 @@ function makeService(categoryId, data) {
         a: `A typical timeline is ${data.timeline}. We confirm exact dates in writing after the discovery call, and you always know what stage your file is at.`,
       },
       {
-        q: 'What will it cost?',
-        a: `Engagements start from $${price.toLocaleString('en-US')}. You receive a fixed written quote before any work begins. Government fees, third-party charges and translations are itemised separately and never marked up silently.`,
+        q: 'How is the fee agreed?',
+        a: 'Every engagement is scoped individually. You receive a fixed written quote before any work begins. Government fees, third-party charges and translations are itemised separately and never marked up silently.',
       },
     ],
   }
@@ -911,7 +910,7 @@ const legal = {
       priceFrom: 900,
       tags: ['legal', 'risk', 'counsel'],
       faqs: [
-        { q: 'Are you a law firm?', a: 'RNS Global is an advisory firm. Regulated legal work is performed by licensed counsel in the relevant jurisdiction, coordinated by us under one engagement.' },
+        { q: 'Are you a law firm?', a: 'RNS Global Partners is an advisory firm. Regulated legal work is performed by licensed counsel in the relevant jurisdiction, coordinated by us under one engagement.' },
       ],
     },
     {

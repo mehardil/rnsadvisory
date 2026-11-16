@@ -1,8 +1,8 @@
 import { CalendarCheck, MessageCircle, Phone } from 'lucide-react'
 import siteConfig from '@/config/siteConfig'
-import { whatsappLink, phoneLink } from '@/utils/links'
+import { whatsappLink, phoneLink, consultationLink } from '@/utils/links'
 import GenerativeArt from './GenerativeArt'
-import { ButtonAnchor, ButtonLink } from './Button'
+import { ButtonAnchor } from './Button'
 import Reveal from './Reveal'
 
 export default function CTASection({
@@ -32,15 +32,20 @@ export default function CTASection({
         </Reveal>
         <Reveal delay={0.1} className="md:col-span-5 md:justify-self-end">
           <div className="flex flex-col gap-3 sm:flex-row md:flex-col md:items-stretch">
-            <ButtonLink to={siteConfig.links.book} variant="gold">
-              <CalendarCheck size={16} /> {siteConfig.brand.name === 'RNS Global' ? 'Book a free consultation' : 'Book a consultation'}
-            </ButtonLink>
+            <ButtonAnchor
+              href={consultationLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="gold"
+            >
+              <CalendarCheck size={16} /> Book a Consultant Now
+            </ButtonAnchor>
             <div className="flex gap-3">
               <ButtonAnchor href={phoneLink()} variant="light" className="flex-1">
                 <Phone size={15} /> Call
               </ButtonAnchor>
               <ButtonAnchor
-                href={whatsappLink('Hello RNS Global, I would like to speak to an advisor.')}
+                href={whatsappLink('Hello RNS Global Partners, I would like to speak to an advisor.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="light"

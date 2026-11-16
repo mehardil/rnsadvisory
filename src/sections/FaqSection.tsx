@@ -6,7 +6,7 @@ import Accordion from '@/components/Accordion'
 import SectionHeading from '@/components/SectionHeading'
 import Reveal from '@/components/Reveal'
 import ArtFrame from '@/components/ArtFrame'
-import { whatsappLink, phoneLink } from '@/utils/links'
+import { whatsappLink, phoneLink, consultationLink } from '@/utils/links'
 
 export default function FaqSection() {
   return (
@@ -32,6 +32,7 @@ export default function FaqSection() {
                   animate={false}
                   rounded="rounded-none"
                   className="h-full w-full"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/55 via-transparent to-transparent" aria-hidden="true" />
               </div>
@@ -42,15 +43,20 @@ export default function FaqSection() {
                 session free.
               </p>
               <div className="mt-4 flex flex-col gap-2">
-                <Link to={siteConfig.links.book} className="btn btn-gold btn-sm w-full">
-                  <CalendarCheck size={14} /> Book a free consultation
-                </Link>
+                <a
+                  href={consultationLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-gold btn-sm w-full"
+                >
+                  <CalendarCheck size={14} /> Book a Consultant Now
+                </a>
                 <div className="grid grid-cols-2 gap-2">
                   <a href={phoneLink()} className="btn btn-outline btn-sm">
                     <Phone size={13} /> Call
                   </a>
                   <a
-                    href={whatsappLink('Hello RNS Global, I have a question.')}
+                    href={whatsappLink('Hello RNS Global Partners, I have a question.')}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-outline btn-sm"

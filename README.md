@@ -1,4 +1,4 @@
-# RNS Global — Expertise Without Borders
+# RNS Global Partners — Expertise Without Borders
 
 A premium, one-stop global advisory and consultancy website built with **React 18 + Vite + TypeScript**, Tailwind CSS, React Router v6, Zustand, Framer Motion, GSAP, Lenis, Recharts and React Three Fiber. It covers education, travel, immigration, business setup, strategy, finance, legal, trade, HR, technology, real estate and specialised advisory across **8 regions**.
 
@@ -172,7 +172,7 @@ Lighthouse targets: performance 85+, accessibility AA, best practices 95+. Run `
 /industries               Industries
 /industries/:slug         Industry detail
 /about                    Story, values, leadership, CSR
-/locations                Globe, nine offices, map
+/locations                Globe, nineteen offices, map
 /insights                 Article grid with search + filters
 /insights/:slug           Article with TOC, share, author
 /case-studies             Before/after case studies
@@ -254,7 +254,7 @@ Set environment variables in Site settings → Environment variables. For cache 
 ### Before launch checklist
 
 - Review the AI-generated editorial images against your brand and the provider's usage terms; replace with licensed photography where real people or places are required.
-- Replace placeholder domain `https://rnsglobal.example` in `siteConfig.brand.website`.
+- Replace placeholder domain `https://rnsglobalpartners.example` in `siteConfig.brand.website`.
 - Replace social URLs, office addresses and licensing details.
 - Set `VITE_FORM_ENDPOINT` and test submissions.
 - Generate or remove AI images; update OG image.

@@ -2,7 +2,7 @@
  * About page content: milestones, values, leadership, certifications and CSR.
  */
 export const story = [
-  { year: '2011', title: 'A single desk in Lahore', text: 'RNS Global begins as a two-person student counselling practice, helping families navigate UK and Australian admissions.' },
+  { year: '2011', title: 'A single desk', text: 'RNS Global Partners begins as a two-person student counselling practice, helping families navigate UK and Australian admissions.' },
   { year: '2014', title: 'Operations arrive in Jebel Ali', text: 'We open a warehousing and logistics base in JAFZA to support clients moving goods between South Asia and the Gulf.' },
   { year: '2016', title: 'Mumbai office opens', text: 'A dedicated India team supports students, sourcing and companies expanding into the UAE.' },
   { year: '2017', title: 'London presence', text: 'Admissions, UK company formation and property advisory are added for clients bridging the Gulf and the UK.' },

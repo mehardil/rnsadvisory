@@ -90,7 +90,7 @@ export default function ExitIntent() {
               <ArtFrame
                 seed="exit-intent-consultation"
                 imageKey="contact-hero"
-                alt="Consultation at RNS Global"
+                alt="Consultation at RNS Global Partners"
                 animate
                 rounded="rounded-none"
                 className="hidden min-h-[320px] md:block"
@@ -131,7 +131,7 @@ export default function ExitIntent() {
                     </form>
                     <div className="mt-3 flex flex-wrap gap-3">
                       <ButtonAnchor
-                        href={whatsappLink('Hello RNS Global, I would like a free first consultation.')}
+                        href={whatsappLink('Hello RNS Global Partners, I would like a free first consultation.')}
                         target="_blank"
                         rel="noopener noreferrer"
                         variant="outline"

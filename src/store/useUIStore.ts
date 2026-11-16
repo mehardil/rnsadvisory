@@ -34,7 +34,7 @@ export function applyTheme(theme: Theme) {
   if (typeof document === 'undefined') return
   document.documentElement.classList.toggle('dark', theme === 'dark')
   const meta = document.querySelector('meta[name="theme-color"]')
-  if (meta) meta.setAttribute('content', theme === 'dark' ? '#060f22' : '#0A1A3A')
+  if (meta) meta.setAttribute('content', theme === 'dark' ? '#0c1a33' : '#10264F')
 }
 
 export const useUIStore = create<UIState>()(

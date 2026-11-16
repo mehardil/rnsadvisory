@@ -11,6 +11,7 @@ import { formatDate } from '@/utils/format'
 import { useUIStore } from '@/store/useUIStore'
 import { breadcrumbJsonLd, articleJsonLd, organizationJsonLd } from '@/utils/seo'
 import siteConfig from '@/config/siteConfig'
+import { consultationLink } from '@/utils/links'
 import { artStyleForArticle } from '@/utils/art'
 
 export default function ArticleDetail() {
@@ -186,9 +187,14 @@ export default function ArticleDetail() {
                 <p className="mt-1.5 text-[0.74rem] leading-relaxed text-muted">
                   General guidance is not advice. A 30-minute call will tell you what applies to you.
                 </p>
-                <Link to="/contact#book" className="btn btn-gold btn-sm mt-3 w-full">
-                  Book a consultation
-                </Link>
+                <a
+                  href={consultationLink(`Hello RNS Global Partners, I read "${article.title}" and would like to book a consultation.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-gold btn-sm mt-3 w-full"
+                >
+                  Book a Consultant Now
+                </a>
               </div>
 
               <button type="button" onClick={() => window.print()} className="btn btn-outline btn-sm w-full justify-start">
@@ -298,6 +304,7 @@ export default function ArticleDetail() {
                     animate={false}
                     rounded="rounded-none"
                     className="h-full w-full transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, 33vw"
                   />
                   <span className="absolute left-3 top-3 rounded-full bg-navy/70 px-2 py-0.5 font-mono text-[7.5px] uppercase tracking-[0.14em] text-softgold backdrop-blur">
                     {item.category}

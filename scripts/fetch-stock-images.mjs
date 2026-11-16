@@ -20,15 +20,16 @@ import sharp from 'sharp'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
-const outDir = path.join(root, 'public', 'generated')
-const manifestPath = path.join(outDir, 'manifest.json')
-const creditsPath = path.join(outDir, 'credits.json')
+const publicDir = path.join(root, 'public', 'generated')
+const basesDir = path.join(root, 'assets-source', 'base-images')
+const manifestPath = path.join(publicDir, 'manifest.json')
+const creditsPath = path.join(publicDir, 'credits.json')
 
 const force = process.argv.includes('--force')
 const only = process.argv.find((arg) => arg.startsWith('--only='))?.split('=')[1]
 
-const WIDTH = 2000
-const HEIGHT = 1250
+const WIDTH = 2200
+const HEIGHT = 1375
 
 /**
  * Hand-picked advisory, consultancy and sector photography. Each entry is a
@@ -45,8 +46,44 @@ const photos = {
   'base-city': { id: 3787839 },
   'base-construction': { id: 8961073 },
   'base-contact': { id: 34823913 },
+  'base-campus': { id: 8651558 },
+  'base-coding': { id: 5483077 },
+  'base-budapest': { id: 32362647 },
+  'base-california': { id: 39197020 },
+  'base-company-registration': { id: 6285095 },
+  'base-corporate-training': { id: 18999470 },
   'base-counselling': { id: 5439141 },
-  'base-education': { id: 29229897 },
+  'base-cybersecurity': { id: 5380582 },
+  'base-education': { id: 8199659 },
+  'base-florida': { id: 37698538 },
+  'base-frankfurt': { id: 19336072 },
+  'base-halifax': { id: 39467104 },
+  'base-jebel-ali': { id: 36176845 },
+  'base-kaaba': { id: 35315918 },
+  'base-k12-school': { id: 8423020 },
+  'base-kuala-lumpur': { id: 32644036 },
+  'base-lahore': { id: 14406067 },
+  'base-legal-docs': { id: 5387258 },
+  'base-london': { id: 32174388 },
+  'base-marketing': { id: 6476260 },
+  'base-mumbai': { id: 37853148 },
+  'base-new-york': { id: 27088996 },
+  'base-osaka': { id: 4058521 },
+  'base-property-viewing': { id: 7641868 },
+  'base-riyadh': { id: 31849530 },
+  'base-shanghai': { id: 31772150 },
+  'base-estonia-tallinn': { id: 29340432 },
+  'base-tokyo': { id: 20378132 },
+  'base-toronto': { id: 39530526 },
+  'base-scholarship': { id: 11085463 },
+  'base-student-visa': { id: 4173241 },
+  'base-study-abroad': { id: 35486996 },
+  'base-study-budget': { id: 36488453 },
+  'base-tax': { id: 6863329 },
+  'base-test-prep': { id: 6684150 },
+  'base-winnipeg': { id: 39613829 },
+  'base-university-admissions': { id: 5940710 },
+  'base-warehouse-logistics': { id: 30824313 },
   'base-energy': { id: 9800092 },
   'base-finance': { id: 5717715 },
   'base-global-network': { id: 30596291, ext: 'png' },
@@ -71,7 +108,7 @@ const photos = {
 }
 
 function sourceUrl(id, ext = 'jpeg') {
-  return `https://images.pexels.com/photos/${id}/pexels-photo-${id}.${ext}?auto=compress&cs=tinysrgb&w=2400`
+  return `https://images.pexels.com/photos/${id}/pexels-photo-${id}.${ext}?auto=compress&cs=tinysrgb&w=3200`
 }
 
 function pageUrl(id) {
@@ -93,7 +130,8 @@ async function download(entry) {
 }
 
 async function run() {
-  await fs.mkdir(outDir, { recursive: true })
+  await fs.mkdir(basesDir, { recursive: true })
+  await fs.mkdir(publicDir, { recursive: true })
 
   let entries = Object.entries(photos)
   if (only) entries = entries.filter(([key]) => key.includes(only))
@@ -109,12 +147,12 @@ async function run() {
   let skipped = 0
   let failed = 0
 
-  console.log(`\nRNS Global — curated stock imagery`)
+  console.log(`\nRNS Global Partners — curated stock imagery`)
   console.log(`Source: Pexels (free for commercial use)`)
   console.log(`Queue: ${entries.length} base photo(s)\n`)
 
   for (const [key, entry] of entries) {
-    const out = path.join(outDir, `${key}.webp`)
+    const out = path.join(basesDir, `${key}.webp`)
     if (!force) {
       try {
         await fs.access(out)
@@ -131,7 +169,7 @@ async function run() {
       await sharp(buffer)
         .resize(WIDTH, HEIGHT, { fit: 'cover', position: 'attention' })
         .modulate({ saturation: 1.02 })
-        .webp({ quality: 84, effort: 5 })
+        .webp({ quality: 80, effort: 6, smartSubsample: true })
         .toFile(out)
 
       const stat = await fs.stat(out)
@@ -168,6 +206,7 @@ async function run() {
   await fs.writeFile(creditsPath, `${JSON.stringify(credits, null, 2)}\n`)
 
   console.log(`\nDone. ${written} fetched · ${skipped} skipped · ${failed} failed`)
+  console.log(`Bases:    assets-source/base-images`)
   console.log(`Manifest: public/generated/manifest.json`)
   console.log(`Credits:  public/generated/credits.json`)
   console.log(`Next:     npm run derive:editorial\n`)

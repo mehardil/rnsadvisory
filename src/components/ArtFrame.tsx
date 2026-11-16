@@ -17,6 +17,7 @@ interface ArtFrameProps {
   cycleMs?: number
   scrim?: 'strong' | 'soft' | 'none'
   fit?: 'cover' | 'contain'
+  sizes?: string
 }
 
 const SCRIMS = {
@@ -43,12 +44,17 @@ export default function ArtFrame({
   cycleMs,
   scrim = 'strong',
   fit = 'cover',
+  sizes = '100vw',
 }: ArtFrameProps) {
   const [loaded, setLoaded] = useState(false)
   const [failed, setFailed] = useState(false)
   const imgRef = useRef<HTMLImageElement | null>(null)
   const imageExists = useHasGeneratedImage(imageKey)
   const showImage = Boolean(imageKey) && imageExists && !failed
+  const isCard = /^(service|industry|article|tool|case|team)-/.test(imageKey || '')
+  const srcSet = showImage
+    ? `/generated/${imageKey}-sm.webp 900w, /generated/${imageKey}.webp ${isCard ? 1200 : 2000}w`
+    : undefined
 
   useEffect(() => {
     setLoaded(false)
@@ -74,10 +80,7 @@ export default function ArtFrame({
         animate={animate && !loaded}
         cycleMs={cycleMs}
         label={alt === '' ? '' : alt || 'Generative brand artwork'}
-        className={cn(
-          'absolute inset-0 h-full w-full transition-[filter,transform] duration-700 ease-out',
-          showImage && !loaded && 'scale-105 blur-md',
-        )}
+        className="absolute inset-0 h-full w-full transition-opacity duration-700 ease-out"
       />
       {showImage && !loaded && (
         <div
@@ -89,10 +92,12 @@ export default function ArtFrame({
         <img
           aria-hidden="true"
           src={`/generated/${imageKey}.webp`}
+          srcSet={srcSet}
+          sizes={sizes}
           alt=""
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
-          className="absolute inset-0 h-full w-full scale-110 object-cover object-center blur-2xl brightness-75 saturate-125"
+          className="absolute inset-0 h-full w-full scale-105 object-cover object-center brightness-75 saturate-125"
         />
       )}
       {showImage && (
@@ -100,6 +105,8 @@ export default function ArtFrame({
           key={imageKey}
           ref={imgRef}
           src={`/generated/${imageKey}.webp`}
+          srcSet={srcSet}
+          sizes={sizes}
           alt={alt}
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"

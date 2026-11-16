@@ -6,6 +6,11 @@ export function whatsappLink(message?: string) {
   return message ? `${base}?text=${encodeURIComponent(message)}` : base
 }
 
+/** Primary booking CTA — routes consultations through WhatsApp. */
+export function consultationLink(message = 'Hello RNS Global Partners, I would like to book a consultation with a consultant.') {
+  return whatsappLink(message)
+}
+
 export function phoneLink() {
   return siteConfig.contact.phoneHref
 }

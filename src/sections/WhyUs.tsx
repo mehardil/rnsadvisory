@@ -57,7 +57,7 @@ export default function WhyUs() {
       <div className="container-x relative">
         <SectionHeading
           tone="dark"
-          eyebrow="Why RNS Global"
+          eyebrow="Why RNS Global Partners"
           title={
             <>
               The difference is <em className="text-softgold">how we work.</em>
@@ -79,6 +79,7 @@ export default function WhyUs() {
                       animate={false}
                       rounded="rounded-none"
                       className="h-full w-full transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, 33vw"
                     />
                     <span className="absolute -bottom-4 left-5 z-10">
                       <IsoBadge icon={reason.icon} tone={toneFor(reason.title)} size="sm" />

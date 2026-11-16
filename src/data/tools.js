@@ -45,7 +45,7 @@ export const tools = [
     title: 'Time Zone & Business Hours',
     short: 'See which offices are open right now.',
     description:
-      'Live local times for all nine offices, with open or closed status, hours and the next practical window to call.',
+      'Live local times for all nineteen offices, with open or closed status, hours and the next practical window to call.',
     icon: 'Clock',
     time: 'Live',
     tag: 'Global',

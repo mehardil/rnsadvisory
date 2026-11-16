@@ -22,6 +22,7 @@ import { legalSlugs } from '../src/data/legal.js'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
 const outDir = path.join(root, 'public', 'generated')
+const basesDir = path.join(root, 'assets-source', 'base-images')
 
 const categoryBase = {
   education: 'base-campus',
@@ -39,7 +40,7 @@ const categoryBase = {
 }
 
 const industryBase = {
-  education: 'base-education',
+  education: 'base-university-admissions',
   'travel-tourism': 'base-travel',
   'real-estate': 'base-realestate',
   'trading-logistics': 'base-trade',
@@ -110,6 +111,19 @@ const categoryServicePool = {
   specialised: ['base-healthcare', 'base-energy', 'base-government', 'base-about', 'base-finance'],
 }
 
+const serviceBaseOverrides = {
+  'travel/umrah-hajj': 'base-kaaba',
+  'business-setup/saudi-company-formation': 'base-riyadh',
+  'business-setup/uk-company-formation': 'base-london',
+  'business-setup/us-llc-formation': 'base-new-york',
+  'business-setup/estonia-company-formation': 'base-estonia-tallinn',
+  'finance/tax-vat-compliance': 'base-tax',
+  'legal/data-privacy-gdpr': 'base-cybersecurity',
+  'technology/web-app-development': 'base-coding',
+  'technology/cybersecurity-advisory': 'base-cybersecurity',
+  'technology/branding-digital-marketing': 'base-marketing',
+}
+
 const serviceMediaBase = {
   education: 'base-university-admissions',
   travel: 'base-travel',
@@ -125,6 +139,10 @@ const serviceMediaBase = {
   specialised: 'base-advisory-meeting',
 }
 
+const articleBaseOverrides = {
+  'study-in-estonia': 'base-estonia-tallinn',
+}
+
 const articlePool = {
   Immigration: ['base-immigration', 'base-government', 'base-city'],
   Education: ['base-education', 'base-insights', 'base-city'],
@@ -135,12 +153,32 @@ const articlePool = {
   Careers: ['base-hr', 'base-about', 'base-city'],
 }
 
-const locationPool = ['base-city', 'base-finance', 'base-construction', 'base-government']
+const locationBase = {
+  dubai: 'base-city',
+  'jebel-ali': 'base-jebel-ali',
+  riyadh: 'base-riyadh',
+  mumbai: 'base-mumbai',
+  lahore: 'base-lahore',
+  london: 'base-london',
+  frankfurt: 'base-frankfurt',
+  tallinn: 'base-estonia-tallinn',
+  'new-york': 'base-new-york',
+  tokyo: 'base-tokyo',
+  osaka: 'base-osaka',
+  shanghai: 'base-shanghai',
+  'kuala-lumpur': 'base-kuala-lumpur',
+  budapest: 'base-budapest',
+  california: 'base-california',
+  florida: 'base-florida',
+  winnipeg: 'base-winnipeg',
+  halifax: 'base-halifax',
+  toronto: 'base-toronto',
+}
 const teamPool = ['base-about', 'base-team-collab', 'base-counselling', 'base-advisory-meeting']
 
 const caseBase = {
   'Technology & Startups': 'base-technology',
-  Education: 'base-education',
+  Education: 'base-study-abroad',
   'Retail & E-commerce': 'base-retail',
   'Trading & Logistics': 'base-trade',
   'Real Estate': 'base-realestate',
@@ -150,7 +188,7 @@ const caseBase = {
 const toolBase = {
   'document-checklist': 'base-insights',
   'company-cost': 'base-finance',
-  'study-budget': 'base-education',
+  'study-budget': 'base-study-budget',
   'currency-converter': 'base-finance',
   'business-hours': 'base-city',
   'eligibility-check': 'base-about',
@@ -185,7 +223,7 @@ const pageBase = {
   'why-speed': 'base-presentation',
   'why-documented': 'base-analytics',
   'service-orbit': 'base-strategy',
-  'service-finder': 'base-workshop',
+  'service-finder': 'base-counselling',
   'about-mission': 'base-workshop',
   'about-vision': 'base-global-network',
   'careers-culture': 'base-team-collab',
@@ -204,7 +242,8 @@ for (const category of serviceCategories) {
   add(`category-${category.slug}`, base)
   const pool = categoryServicePool[category.slug] || [base]
   category.services.forEach((service, index) => {
-    add(`service-${category.slug}-${service.slug}`, pool[index % pool.length])
+    const override = serviceBaseOverrides[`${category.slug}/${service.slug}`]
+    add(`service-${category.slug}-${service.slug}`, override || pool[index % pool.length])
   })
   add(`service-media-${category.slug}`, serviceMediaBase[category.slug] || base)
 }
@@ -214,10 +253,10 @@ const articleCounters = {}
 for (const article of articles) {
   const pool = articlePool[article.category] || ['base-insights']
   const index = articleCounters[article.category] || 0
-  add(`article-${article.slug}`, pool[index % pool.length])
+  add(`article-${article.slug}`, articleBaseOverrides[article.slug] || pool[index % pool.length])
   articleCounters[article.category] = index + 1
 }
-locations.forEach((location, index) => add(`location-${location.id}`, locationPool[index % locationPool.length]))
+locations.forEach((location) => add(`location-${location.id}`, locationBase[location.id] || 'base-city'))
 leadership.forEach((person, index) => add(`team-${person.initials.toLowerCase()}`, teamPool[index % teamPool.length]))
 for (const tool of tools) add(`tool-${tool.slug}`, toolBase[tool.slug] || 'base-insights')
 for (const study of caseStudies) add(`case-${study.slug}`, caseBase[study.sector] || 'base-case')
@@ -230,21 +269,6 @@ function hash(value) {
   return h
 }
 
-function cropFor(key) {
-  const h = hash(key)
-  const isCard = /^(service|industry|article|tool|case|team)-/.test(key)
-  if (!isCard) return null
-
-  // Cards use the full frame so each photograph reads cleanly instead of being
-  // cropped tighter than the 16:10 cover it is displayed in.
-  const zooms = [1]
-  const zoom = zooms[h % zooms.length]
-  const width = Math.round(1600 / zoom)
-  const height = Math.round(1000 / zoom)
-  const left = Math.round(((h >>> 5) % 1000) / 1000 * (1600 - width))
-  const top = Math.round(((h >>> 11) % 1000) / 1000 * (1000 - height))
-  return { left, top, width, height }
-}
 
 await fs.mkdir(outDir, { recursive: true })
 
@@ -252,7 +276,7 @@ const bases = new Map()
 for (const [, base] of assignments) {
   if (bases.has(base)) continue
   try {
-    bases.set(base, await fs.readFile(path.join(outDir, `${base}.webp`)))
+    bases.set(base, await fs.readFile(path.join(basesDir, `${base}.webp`)))
   } catch {
     console.warn(`  missing base ${base}.webp — using a fallback frame`)
   }
@@ -268,20 +292,30 @@ for (const [key, base] of assignments) {
   const buffer = bases.get(resolvedBase)
   if (!buffer) throw new Error(`missing base buffer for ${base}`)
 
-  const crop = cropFor(key)
   const h = hash(key)
   const brightness = 0.99 + (h % 5) * 0.008
   const saturation = 0.9 + ((h >>> 3) % 4) * 0.02
 
+  const isCard = /^(service|industry|article|tool|case|team)-/.test(key)
+  const width = isCard ? 1200 : 2000
+  const height = isCard ? 750 : 1250
+
   let pipeline = sharp(buffer)
-  if (crop) pipeline = pipeline.extract(crop)
   pipeline = pipeline
-    .resize(1600, 1000, { fit: 'cover', position: 'centre' })
+    .resize(width, height, { fit: 'cover', position: 'centre' })
     .modulate({ brightness, saturation })
-    .webp({ quality: 82, effort: 5 })
+    .webp({ quality: isCard ? 78 : 82, effort: 6, smartSubsample: true })
 
   await pipeline.toFile(path.join(outDir, `${key}.webp`))
-  images[key] = { source: resolvedBase }
+
+  const smBuffer = await sharp(buffer)
+    .resize(900, 563, { fit: 'cover', position: 'centre' })
+    .modulate({ brightness, saturation })
+    .webp({ quality: isCard ? 74 : 78, effort: 6, smartSubsample: true })
+    .toBuffer()
+  await fs.writeFile(path.join(outDir, `${key}-sm.webp`), smBuffer)
+
+  images[key] = { source: resolvedBase, variants: { sm: 900 } }
   written += 1
 }
 
@@ -294,10 +328,12 @@ try {
 }
 
 const manifest = {
-  provider: 'pexels + pollinations editorial base set',
+  provider: 'pexels editorial photography',
   generatedAt: new Date().toISOString(),
   style: 'editorial corporate photography',
-  images: { ...(previous.images || {}), ...images },
+  images: Object.fromEntries(
+    Object.entries({ ...(previous.images || {}), ...images }).filter(([key]) => !key.startsWith('base-')),
+  ),
 }
 
 await fs.writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`)

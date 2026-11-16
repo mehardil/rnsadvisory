@@ -14,8 +14,8 @@ export default function About() {
   return (
     <>
       <Seo
-        title="About RNS Global"
-        description="Founded in 2011 in Lahore, RNS Global is now one advisory firm across eight regions — education, travel, business, finance, legal and technology under one accountable team."
+        title="About RNS Global Partners"
+        description="Founded in 2011, RNS Global Partners is now one advisory firm across eight regions — education, travel, business, finance, legal and technology under one accountable team."
         path="/about"
         jsonLd={[
           organizationJsonLd(),
@@ -32,7 +32,7 @@ export default function About() {
             Built on one promise: <em className="italic text-softgold">tell the truth.</em>
           </>
         }
-        description="RNS Global began as a two-person student counselling desk in Lahore. Fifteen years later we are one advisory firm across eight regions — still measured by whether clients would send their family."
+        description="RNS Global Partners began as a two-person student counselling desk. Fifteen years later we are one advisory firm across eight regions — still measured by whether clients would send their family."
         crumbs={[{ name: 'About' }]}
         seed="about-story"
         style="contours"
@@ -41,7 +41,7 @@ export default function About() {
             <ArtFrame
               seed="about-story-image"
               imageKey="about-story"
-              alt="RNS Global story"
+              alt="RNS Global Partners story"
               animate
               className="aspect-[4/3] w-full"
             />
@@ -215,6 +215,7 @@ export default function About() {
                       animate={false}
                       rounded="rounded-none"
                       className="h-full w-full transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, 33vw"
                     />
                     <span className="absolute left-4 top-4 rounded-full bg-navy/70 px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.14em] text-softgold backdrop-blur">
                       {person.location}

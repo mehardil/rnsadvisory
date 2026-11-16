@@ -86,6 +86,7 @@ export default function ServiceFinder() {
               animate={false}
               rounded="rounded-2xl"
               className="aspect-[4/3] w-full"
+              sizes="(max-width: 1024px) 100vw, 33vw"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent px-4 pb-3 pt-12">
               <p className="font-mono text-[8px] uppercase tracking-[0.16em] text-softgold">A real advisor reviews every enquiry</p>

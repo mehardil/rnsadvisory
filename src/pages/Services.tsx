@@ -5,7 +5,8 @@ import Seo from '@/components/Seo'
 import PageHero from '@/components/PageHero'
 import ServiceCard from '@/components/ServiceCard'
 import Reveal from '@/components/Reveal'
-import { ButtonLink } from '@/components/Button'
+import { ButtonAnchor, ButtonLink } from '@/components/Button'
+import { consultationLink } from '@/utils/links'
 import { serviceCategories } from '@/data/services'
 import { breadcrumbJsonLd, organizationJsonLd } from '@/utils/seo'
 import { cn } from '@/utils/cn'
@@ -53,9 +54,14 @@ export default function Services() {
         seed="services-hero"
         style="aurora"
       >
-        <ButtonLink to="/contact#book" variant="gold">
-          Book a free consultation
-        </ButtonLink>
+        <ButtonAnchor
+          href={consultationLink()}
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="gold"
+        >
+          Book a Consultant Now
+        </ButtonAnchor>
         <ButtonLink to="/tools" variant="light">
           Try the free tools
         </ButtonLink>

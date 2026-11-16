@@ -1,12 +1,10 @@
-import { lazy, Suspense } from 'react'
 import siteConfig from '@/config/siteConfig'
 import Counter from '@/components/Counter'
 import Marquee from '@/components/Marquee'
 import Reveal from '@/components/Reveal'
 import TiltCard from '@/components/TiltCard'
 import ArtFrame from '@/components/ArtFrame'
-
-const StatsChart = lazy(() => import('@/components/StatsChart'))
+import StatsChart from '@/components/StatsChart'
 
 export default function TrustStrip() {
   return (
@@ -28,6 +26,7 @@ export default function TrustStrip() {
                 animate={false}
                 rounded="rounded-xl"
                 className="aspect-[16/9] w-full"
+                sizes="(max-width: 1024px) 100vw, 40vw"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/85 to-transparent px-4 pb-3 pt-10">
                 <p className="font-mono text-[8px] uppercase tracking-[0.16em] text-softgold">Dubai · London · Mumbai · Riyadh</p>
@@ -52,9 +51,7 @@ export default function TrustStrip() {
                 </span>
               </div>
               <div className="mt-5 h-[220px]">
-                <Suspense fallback={<div className="skeleton h-full w-full" />}>
-                  <StatsChart />
-                </Suspense>
+                <StatsChart />
               </div>
               <div className="mt-4 grid grid-cols-3 gap-3 border-t border-[color:var(--hair)] pt-4">
                 <div>

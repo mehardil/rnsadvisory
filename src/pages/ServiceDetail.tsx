@@ -26,10 +26,8 @@ import { ButtonAnchor } from '@/components/Button'
 import NotFound from './NotFound'
 import { allServices, getCategory, getService } from '@/data/services'
 import { useUIStore } from '@/store/useUIStore'
-import { convertCurrency } from '@/utils/currency'
-import { formatCurrency } from '@/utils/format'
 import { readStorage, writeStorage } from '@/utils/storage'
-import { whatsappLink, phoneLink } from '@/utils/links'
+import { whatsappLink, phoneLink, consultationLink } from '@/utils/links'
 import { breadcrumbJsonLd, faqJsonLd, organizationJsonLd, serviceJsonLd } from '@/utils/seo'
 import { cn } from '@/utils/cn'
 import { artStyleForCategory } from '@/utils/art'
@@ -38,7 +36,6 @@ export default function ServiceDetail() {
   const { categorySlug = '', serviceSlug = '' } = useParams()
   const service = getService(categorySlug, serviceSlug)
   const category = getCategory(categorySlug)
-  const currency = useUIStore((s) => s.currency)
   const pushToast = useUIStore((s) => s.pushToast)
   const storageKey = `rns-docs-${categorySlug}-${serviceSlug}`
   const [checklist, setChecklist] = useState<Record<string, boolean>>(() =>
@@ -46,8 +43,6 @@ export default function ServiceDetail() {
   )
 
   if (!service || !category) return <NotFound />
-
-  const money = (usd: number) => formatCurrency(convertCurrency(usd, 'USD', currency), currency)
 
   const toggle = (item: string) => {
     const next = { ...checklist, [item]: !checklist[item] }
@@ -68,8 +63,6 @@ export default function ServiceDetail() {
     .slice(0, 3)
 
   const crossSell = allServices.filter((s) => s.categorySlug !== categorySlug && s.featured).slice(0, 2)
-
-  const inclusions = Array.from(new Set(service.packages.flatMap((p: { inclusions: string[] }) => p.inclusions))) as string[]
 
   const brochure = () => {
     pushToast({
@@ -113,9 +106,7 @@ export default function ServiceDetail() {
           <div className="grid items-center gap-10 lg:grid-cols-12">
             <div className="lg:col-span-7">
               <Reveal>
-                <span className="eyebrow !text-softgold mb-4">
-                  {category.title} · From {money(service.priceFrom)}
-                </span>
+                <span className="eyebrow !text-softgold mb-4">{category.title}</span>
                 <h1 className="font-display text-[clamp(2.4rem,4.6vw,4rem)] font-medium leading-[1.02] tracking-[-0.035em] text-ivory">
                   {service.title}
                 </h1>
@@ -129,8 +120,8 @@ export default function ServiceDetail() {
                     <p className="mt-1 text-[0.8rem] text-ivory/80">{service.timeline}</p>
                   </div>
                   <div>
-                    <p className="font-mono text-[8px] uppercase tracking-[0.16em] text-ivory/35">Engagement from</p>
-                    <p className="mt-1 font-mono text-[0.85rem] text-softgold">{money(service.priceFrom)}</p>
+                    <p className="font-mono text-[8px] uppercase tracking-[0.16em] text-ivory/35">Engagement</p>
+                    <p className="mt-1 text-[0.8rem] text-softgold">Scoped after a call</p>
                   </div>
                   <div>
                     <p className="font-mono text-[8px] uppercase tracking-[0.16em] text-ivory/35">Response</p>
@@ -143,7 +134,7 @@ export default function ServiceDetail() {
                     <CalendarCheck size={16} /> Get a free quote
                   </a>
                   <ButtonAnchor
-                    href={whatsappLink(`Hello RNS Global, I am interested in ${service.title}.`)}
+                    href={whatsappLink(`Hello RNS Global Partners, I am interested in ${service.title}.`)}
                     target="_blank"
                     rel="noopener noreferrer"
                     variant="light"
@@ -167,11 +158,10 @@ export default function ServiceDetail() {
                     seed={`service-${category.slug}-${service.slug}`}
                     imageKey={`service-${category.slug}-${service.slug}`}
                     style={artStyleForCategory(category.slug)}
-                    alt={`${service.title} — RNS Global`}
+                    alt={`${service.title} — RNS Global Partners`}
                     animate
                     priority
                     rounded="rounded-2xl"
-                    fit="contain"
                     className="aspect-[4/3] w-full"
                   />
                   <span className="absolute -left-3 -top-3 z-10">
@@ -179,8 +169,15 @@ export default function ServiceDetail() {
                   </span>
                   <div className="glass-dark absolute -bottom-4 left-4 right-4 flex items-center justify-between rounded-xl px-4 py-3">
                     <div>
-                      <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-ivory/40">Starting from</p>
-                      <p className="font-mono text-lg text-softgold">{money(service.priceFrom)}</p>
+                      <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-ivory/40">Engagement</p>
+                      <a
+                        href={consultationLink(`Hello RNS Global Partners, I would like to talk about ${service.title}.`)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-mono text-sm text-softgold hover:underline"
+                      >
+                        Contact us →
+                      </a>
                     </div>
                     <div className="text-right">
                       <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-ivory/40">Delivery</p>
@@ -246,7 +243,6 @@ export default function ServiceDetail() {
                 alt={`${category.title} advisory`}
                 animate={false}
                 rounded="rounded-2xl"
-                fit="contain"
                 className="aspect-[21/9] w-full"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent px-5 pb-4 pt-14">
@@ -363,55 +359,25 @@ export default function ServiceDetail() {
             </Reveal>
 
             <Reveal id="packages">
-              <span className="eyebrow">Packages</span>
-              <h2 className="mt-3 font-display text-3xl text-ink">Fixed-fee packages</h2>
+              <span className="eyebrow">Next step</span>
+              <h2 className="mt-3 font-display text-3xl text-ink">Talk to a consultant</h2>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
-                Indicative pricing, confirmed after scoping. Government fees and third-party charges are itemised
-                separately. All packages include a written scope and one named advisor.
+                Every engagement is scoped individually. Tell us what you need and we will confirm the approach, the
+                timeline and a written quote before any work begins.
               </p>
 
-              <div className="mt-6 overflow-x-auto rounded-2xl border border-[color:var(--hair)] bg-[color:var(--surface)]">
-                <table className="w-full min-w-[620px] border-collapse text-left">
-                  <caption className="sr-only">Package comparison for {service.title}</caption>
-                  <thead>
-                    <tr className="border-b border-[color:var(--hair)]">
-                      <th scope="col" className="p-4 text-[0.7rem] font-medium text-muted">Included</th>
-                      {service.packages.map((pkg: { name: string; note: string; price: number }, i: number) => (
-                        <th key={pkg.name} scope="col" className={cn('p-4 align-top', i === 1 && 'bg-gold/[0.06]')}>
-                          <span className="block font-display text-lg text-ink">{pkg.name}</span>
-                          <span className="block font-mono text-[8px] uppercase tracking-wider text-gold-ink">{pkg.note}</span>
-                          <span className="mt-1 block font-mono text-sm text-ink">{money(pkg.price)}</span>
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {inclusions.map((feature) => (
-                      <tr key={feature} className="border-b border-[color:var(--hair)] last:border-0">
-                        <th scope="row" className="p-4 text-[0.76rem] font-normal text-muted">{feature}</th>
-                        {service.packages.map((pkg: { name: string; inclusions: string[] }, i: number) => (
-                          <td key={pkg.name} className={cn('p-4', i === 1 && 'bg-gold/[0.06]')}>
-                            {pkg.inclusions.includes(feature) ? (
-                              <Check size={15} className="text-success" aria-label="Included" />
-                            ) : (
-                              <span className="text-faint" aria-label="Not included">—</span>
-                            )}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                    <tr>
-                      <th scope="row" className="p-4" />
-                      {service.packages.map((pkg: { name: string }, i: number) => (
-                        <td key={pkg.name} className={cn('p-4', i === 1 && 'bg-gold/[0.06]')}>
-                          <a href="#quote" className={cn('btn btn-sm w-full', i === 1 ? 'btn-gold' : 'btn-outline')}>
-                            Choose {pkg.name}
-                          </a>
-                        </td>
-                      ))}
-                    </tr>
-                  </tbody>
-                </table>
+              <div className="mt-6 flex flex-wrap gap-3 rounded-2xl border border-[color:var(--hair)] bg-[color:var(--surface)] p-6">
+                <a
+                  href={consultationLink(`Hello RNS Global Partners, I would like to book a consultation about ${service.title}.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-gold"
+                >
+                  <MessageCircle size={15} /> Book a Consultant Now
+                </a>
+                <a href="#quote" className="btn btn-outline">
+                  <CalendarCheck size={15} /> Request a callback
+                </a>
               </div>
             </Reveal>
 
@@ -452,7 +418,7 @@ export default function ServiceDetail() {
                     <Phone size={14} className="text-gold-ink" /> +92 331 905 1913
                   </a>
                   <a
-                    href={whatsappLink(`Hello RNS Global, I have a question about ${service.title}.`)}
+                    href={whatsappLink(`Hello RNS Global Partners, I have a question about ${service.title}.`)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2.5 rounded-lg border border-[color:var(--hair)] px-3 py-2.5 text-[0.78rem] text-ink transition-colors hover:border-gold"

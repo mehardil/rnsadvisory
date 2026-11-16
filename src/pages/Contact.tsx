@@ -65,7 +65,7 @@ function BookingSection() {
           within four business hours.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <a href={whatsappLink('Hello RNS Global, I have just requested a consultation.')} target="_blank" rel="noopener noreferrer" className="btn btn-navy">
+          <a href={whatsappLink('Hello RNS Global Partners, I have just requested a consultation.')} target="_blank" rel="noopener noreferrer" className="btn btn-navy">
             <MessageCircle size={15} /> WhatsApp
           </a>
           <button type="button" onClick={() => setSent(false)} className="btn btn-outline">
@@ -146,8 +146,8 @@ export default function Contact() {
   return (
     <>
       <Seo
-        title="Contact RNS Global"
-        description="Call, WhatsApp or email RNS Global. Book a free consultation with an advisor and get a response within four business hours."
+        title="Contact RNS Global Partners"
+        description="Call, WhatsApp or email RNS Global Partners. Book a free consultation with an advisor and get a response within four business hours."
         path="/contact"
         jsonLd={[
           organizationJsonLd(),
@@ -178,7 +178,7 @@ export default function Contact() {
             <div className="mt-4 space-y-2 border-t border-ivory/10 pt-4 text-[0.72rem] text-ivory/55">
               <p className="flex items-center gap-2"><ShieldCheck size={12} className="text-success" /> Confidential by default</p>
               <p className="flex items-center gap-2"><Clock size={12} className="text-gold" /> Mon–Sat · 09:00–19:00 GST</p>
-              <p className="flex items-center gap-2"><MapPin size={12} className="text-gold" /> Dubai HQ · 9 offices</p>
+              <p className="flex items-center gap-2"><MapPin size={12} className="text-gold" /> Dubai HQ · 19 offices</p>
             </div>
           </div>
         }
@@ -191,7 +191,7 @@ export default function Contact() {
               { icon: Phone, label: 'Call us', value: siteConfig.contact.phoneDisplay, href: phoneLink(), note: 'Mon–Sat, 09:00–19:00 GST' },
               { icon: MessageCircle, label: 'WhatsApp', value: siteConfig.contact.phoneDisplay, href: whatsappLink(), note: 'Fastest for urgent matters' },
               { icon: Mail, label: 'Email', value: siteConfig.contact.email, href: mailLink('Enquiry'), note: 'Reply within 4 business hours' },
-              { icon: Clock, label: 'Working hours', value: 'Mon–Sat · 09:00–19:00', href: '/locations', note: 'Nine offices, eight regions' },
+              { icon: Clock, label: 'Working hours', value: 'Mon–Sat · 09:00–19:00', href: '/locations', note: 'Nineteen offices, eight regions' },
             ].map((item) => {
               const inner = (
                 <>
@@ -325,7 +325,7 @@ export default function Contact() {
           <Reveal className="lg:col-span-7">
             <div className="overflow-hidden rounded-2xl border border-[color:var(--hair)]">
               <iframe
-                title="Map of RNS Global head office in DIFC, Dubai"
+                title="Map of RNS Global Partners head office in DIFC, Dubai"
                 src="https://www.google.com/maps?q=DIFC%2C%20Dubai%2C%20UAE&output=embed"
                 className="h-[320px] w-full border-0"
                 loading="lazy"

@@ -18,7 +18,7 @@ export default class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, info: ErrorInfo) {
     // In production this would be forwarded to an error service.
-    if (import.meta.env.DEV) console.error('RNS Global error boundary:', error, info)
+    if (import.meta.env.DEV) console.error('RNS Global Partners error boundary:', error, info)
   }
 
   render() {

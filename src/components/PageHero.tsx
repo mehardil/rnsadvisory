@@ -44,10 +44,10 @@ export default function PageHero({
         animate={false}
         priority
         rounded="rounded-none"
-        className="absolute inset-0 h-full w-full opacity-60"
+        className="absolute inset-0 h-full w-full"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/80 to-navy/35" aria-hidden="true" />
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-navy to-transparent" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/65 to-navy/10" aria-hidden="true" />
+      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-navy/80 to-transparent" aria-hidden="true" />
       <div
         className={cn(
           'container-x relative grid items-center gap-12 pb-16 pt-32 md:pt-40 lg:grid-cols-12',

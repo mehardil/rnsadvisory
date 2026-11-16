@@ -367,7 +367,7 @@ export default function Globe({ offices, hub, selectedId, onSelect, className }:
         ref={canvasRef}
         className="h-full w-full touch-none"
         role="img"
-        aria-label="Interactive globe showing RNS Global offices. Arcs connect the Dubai headquarters to each regional office. A list view follows below."
+        aria-label="Interactive globe showing RNS Global Partners offices. Arcs connect the Dubai headquarters to each regional office. A list view follows below."
       />
       <div className="pointer-events-none absolute bottom-3 left-3 flex items-center gap-4 font-mono text-[9px] uppercase tracking-[0.14em] text-ivory/45">
         <span className="inline-flex items-center gap-1.5">

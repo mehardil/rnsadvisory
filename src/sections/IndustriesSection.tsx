@@ -38,6 +38,7 @@ export default function IndustriesSection() {
                         animate={false}
                         rounded="rounded-none"
                         className="h-full w-full transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       />
                       <span className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-navy/60 text-ivory backdrop-blur transition-colors group-hover:bg-gold group-hover:text-navy">
                         <ArrowUpRight size={14} />

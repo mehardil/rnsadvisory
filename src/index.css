@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   RNS Global — Design tokens
+   RNS Global Partners — Design tokens
    Semantic variables let every surface adapt to dark mode without per-class
    dark: variants, which keeps the CSS small and the palette consistent.
    ========================================================================== */
 :root {
-  --bg: #f7f5ef;
-  --bg-2: #f1eee4;
+  --bg: #faf8f3;
+  --bg-2: #f4f0e6;
   --surface: #ffffff;
   --surface-2: #f4f1e8;
   --ink: #0a1a3a;
@@ -26,10 +26,10 @@
 }
 
 .dark {
-  --bg: #060f22;
-  --bg-2: #08152d;
-  --surface: #0b1a35;
-  --surface-2: #102344;
+  --bg: #0c1a33;
+  --bg-2: #102340;
+  --surface: #14294b;
+  --surface-2: #1a3459;
   --ink: #f4f1e9;
   --ink-soft: #a9b6cc;
   --ink-faint: #7d8da7;
@@ -110,6 +110,13 @@ body::after {
   pointer-events: none;
   opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+/* Mobile: skip the full-screen grain layer and its paint cost. */
+@media (max-width: 767px) {
+  body::after {
+    display: none;
+  }
 }
 
 /* Scrollbar */

@@ -1,25 +1,25 @@
 /**
- * RNS Global — single source of truth for brand, contact details and navigation.
+ * RNS Global Partners — single source of truth for brand, contact details and navigation.
  * Edit this file to re-brand the entire website. Components never hard-code
  * the company name, phone number, email or social links.
  */
 
 export const siteConfig = {
   brand: {
-    name: 'RNS Global',
+    name: 'RNS Global Partners',
     shortName: 'RNS',
-    legalName: 'RNS Global Advisory FZE',
+    legalName: 'RNS Global Partners FZE',
     tagline: 'Expertise Without Borders.',
     subline:
       'Education. Travel. Business. Finance. Legal. Technology. One trusted partner across 8 regions.',
     description:
-      'RNS Global is a one-stop advisory and consultancy firm for individuals, families, students, founders, investors and corporations. We connect education, travel, immigration, business setup, finance, legal, trade, technology and real estate into one accountable partnership.',
+      'RNS Global Partners is a one-stop advisory and consultancy firm for individuals, families, students, founders, investors and corporations. We connect education, travel, immigration, business setup, finance, legal, trade, technology and real estate into one accountable partnership.',
     founded: 2011,
     years: 15,
     regions: 8,
-    offices: 9,
+    offices: 19,
     services: 71,
-    website: 'https://rnsglobal.example',
+    website: 'https://rnsglobalpartners.example',
     streetAddress: 'Level 21, Emirates Financial Towers, DIFC',
     city: 'Dubai',
     country: 'United Arab Emirates',
@@ -42,13 +42,13 @@ export const siteConfig = {
   },
 
   socials: [
-    { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/company/rns-global' },
-    { id: 'facebook', label: 'Facebook', href: 'https://facebook.com/rnsglobal' },
-    { id: 'instagram', label: 'Instagram', href: 'https://instagram.com/rnsglobal' },
-    { id: 'x', label: 'X', href: 'https://x.com/rnsglobal' },
-    { id: 'youtube', label: 'YouTube', href: 'https://youtube.com/@rnsglobal' },
+    { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/company/rns-global-partners' },
+    { id: 'facebook', label: 'Facebook', href: 'https://facebook.com/rnsglobalpartners' },
+    { id: 'instagram', label: 'Instagram', href: 'https://instagram.com/rnsglobalpartners' },
+    { id: 'x', label: 'X', href: 'https://x.com/rnsglobalpartners' },
+    { id: 'youtube', label: 'YouTube', href: 'https://youtube.com/@rnsglobalpartners' },
     { id: 'whatsapp', label: 'WhatsApp', href: 'https://wa.me/923319051913' },
-    { id: 'tiktok', label: 'TikTok', href: 'https://tiktok.com/@rnsglobal' },
+    { id: 'tiktok', label: 'TikTok', href: 'https://tiktok.com/@rnsglobalpartners' },
   ],
 
   links: {
@@ -145,10 +145,11 @@ export const siteConfig = {
         { label: 'Family Office Services', to: '/services/specialised/family-office' },
       ],
       company: [
-        { label: 'About RNS Global', to: '/about' },
+        { label: 'About RNS Global Partners', to: '/about' },
         { label: 'Leadership', to: '/about#leadership' },
         { label: 'Careers', to: '/careers' },
         { label: 'Insights', to: '/insights' },
+        { label: 'Newsletter', to: '/#newsletter' },
         { label: 'Case Studies', to: '/case-studies' },
         { label: 'FAQs', to: '/contact#faq' },
         { label: 'Partners', to: '/about#partners' },

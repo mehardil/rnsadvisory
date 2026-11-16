@@ -207,8 +207,8 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="relative border-t border-ivory/10 bg-[#071227]">
-        <div className="container-x flex flex-col gap-4 py-5 text-[0.7rem] text-ivory/40 md:flex-row md:items-center md:justify-between">
+      <div className="relative border-t border-ivory/10 bg-[#0b1d3b]">
+        <div className="container-x flex flex-col gap-4 pb-[calc(5.5rem+env(safe-area-inset-bottom))] pt-5 text-[0.7rem] text-ivory/40 md:flex-row md:items-center md:justify-between md:py-5">
           <p>
             © {year} {siteConfig.brand.legalName}. {t('footer.rights')}
           </p>

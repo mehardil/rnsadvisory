@@ -5,8 +5,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        navy: '#0A1A3A',
-        deepblue: '#12306B',
+        navy: '#10264F',
+        deepblue: '#173C82',
         royal: '#1F4FD8',
         gold: '#C9A24B',
         softgold: '#E8D6A0',

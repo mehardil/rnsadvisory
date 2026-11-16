@@ -102,14 +102,14 @@ export default function ChatWidget() {
             transition={{ duration: 0.2 }}
             className="fixed bottom-36 right-4 z-[110] flex h-[min(520px,70vh)] w-[min(380px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-[color:var(--hair)] bg-[color:var(--surface)] shadow-lift md:bottom-24 md:right-6"
             role="dialog"
-            aria-label="RNS Assistant"
+            aria-label="RNS Partners Assistant"
           >
             <div className="flex items-center gap-3 border-b border-[color:var(--hair)] bg-navy px-4 py-3.5 text-ivory">
               <span className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/40 bg-gold/10 text-softgold">
                 <Sparkles size={16} />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold">RNS Assistant</p>
+                <p className="text-sm font-semibold">RNS Partners Assistant</p>
                 <p className="text-[0.66rem] text-ivory/50">Scripted guidance · human handover</p>
               </div>
               <button type="button" onClick={() => setOpen(false)} aria-label="Close assistant" className="text-ivory/60 hover:text-ivory">

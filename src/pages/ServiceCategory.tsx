@@ -81,7 +81,7 @@ export default function ServiceCategory() {
               <h2 className="h2">What we deliver</h2>
             </div>
             <p className="max-w-md text-[0.8rem] leading-relaxed text-muted">
-              Each service has a defined scope, document checklist, timeline and package pricing. If your need crosses
+              Each service has a defined scope, document checklist and timeline. If your need crosses
               two services, we quote them as one engagement.
             </p>
           </div>

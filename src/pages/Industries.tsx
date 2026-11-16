@@ -12,7 +12,7 @@ export default function Industries() {
     <>
       <Seo
         title="Industries we serve"
-        description="Fourteen sectors supported by RNS Global: education, travel, real estate, trade, healthcare, technology, retail, manufacturing, energy, hospitality, finance, construction, government and agriculture."
+        description="Fourteen sectors supported by RNS Global Partners: education, travel, real estate, trade, healthcare, technology, retail, manufacturing, energy, hospitality, finance, construction, government and agriculture."
         path="/industries"
         jsonLd={[
           organizationJsonLd(),

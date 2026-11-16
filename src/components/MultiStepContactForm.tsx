@@ -112,7 +112,7 @@ export default function MultiStepContactForm() {
           Reference <strong className="text-gold-ink">{reference}</strong>
         </p>
         <div className="mt-7 flex flex-wrap justify-center gap-3">
-          <ButtonAnchor href={whatsappLink(`Hello RNS Global, my reference is ${reference}.`)} target="_blank" rel="noopener noreferrer" variant="navy">
+          <ButtonAnchor href={whatsappLink(`Hello RNS Global Partners, my reference is ${reference}.`)} target="_blank" rel="noopener noreferrer" variant="navy">
             <MessageCircle size={15} /> WhatsApp us
           </ButtonAnchor>
           <ButtonAnchor href={phoneLink()} variant="outline">

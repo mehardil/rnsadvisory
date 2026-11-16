@@ -34,7 +34,7 @@ export default function Insights() {
     <>
       <Seo
         title="Insights — visas, study, business and markets"
-        description="Practical briefings from the RNS Global team on UAE visas, studying in Estonia, company setup, UK student visas, Jebel Ali exports, corporate tax and more."
+        description="Practical briefings from the RNS Global Partners team on UAE visas, studying in Estonia, company setup, UK student visas, Jebel Ali exports, corporate tax and more."
         path="/insights"
         jsonLd={[
           organizationJsonLd(),

@@ -1,6 +1,6 @@
 # Build Log
 
-**Project:** RNS Global — Expertise Without Borders
+**Project:** RNS Global Partners — Expertise Without Borders
 **Stack:** React 18, Vite, TypeScript, Tailwind CSS, React Router v6, Zustand, Framer Motion, GSAP, Lenis, Recharts, React Three Fiber, i18next, React Hook Form + Zod.
 **Date:** October 2026
 **Status:** Complete build; all verification commands pass (see §4).
@@ -176,7 +176,7 @@ npm run test:e2e   # requires: npx playwright install chromium
 
 ## 5. Placeholders to replace before launch
 
-- Domain `https://rnsglobal.example` → real domain (and regenerate sitemap with `SITE_URL`).
+- Domain `https://rnsglobalpartners.example` → real domain (and regenerate sitemap with `SITE_URL`).
 - Social URLs.
 - Office street addresses, licences, partner names and certification numbers.
 - Testimonials, client names, case-study metrics and photographs.

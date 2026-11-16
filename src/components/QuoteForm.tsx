@@ -41,7 +41,7 @@ export default function QuoteForm({ serviceName }: { serviceName: string }) {
           A named advisor will reply within four business hours. For anything urgent, message us on WhatsApp.
         </p>
         <ButtonAnchor
-          href={whatsappLink(`Hello RNS Global, I would like a quote for ${serviceName}.`)}
+          href={whatsappLink(`Hello RNS Global Partners, I would like a quote for ${serviceName}.`)}
           target="_blank"
           rel="noopener noreferrer"
           variant="navy"

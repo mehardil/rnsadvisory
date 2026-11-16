@@ -16,8 +16,8 @@
     "morePractices": "More practices"
   },
   "cta": {
-    "book": "Book Free Consultation",
-    "bookShort": "Book Consultation",
+    "book": "Book a Consultant Now",
+    "bookShort": "Book a Consultant",
     "talk": "Talk to an advisor",
     "explore": "Explore Services",
     "getQuote": "Get a free quote",
@@ -35,10 +35,11 @@
     "readMore": "Read article"
   },
   "hero": {
-    "eyebrow": "Global advisory · Est. 2011",
+    "eyebrow": "Fastest advisory · Since 2011",
     "title1": "Expertise",
     "title2": "Without",
     "title3": "Borders.",
+    "promise": "Fastest advisory · One consultant · Trusted for life.",
     "subline": "Education. Travel. Business. Finance. Legal. Technology. One trusted partner across 8 regions.",
     "scroll": "Scroll to explore",
     "trusted": "Trusted by students, founders, families and boards in 8 regions"
@@ -54,7 +55,7 @@
     "howWeWork": "How we work",
     "industries": "Industries",
     "caseStudies": "Case studies",
-    "whyUs": "Why RNS Global",
+    "whyUs": "Why RNS Global Partners",
     "testimonials": "Client voices",
     "insights": "Insights",
     "faq": "Questions, answered",
@@ -96,7 +97,7 @@
     "copied": "Copied"
   },
   "search": {
-    "title": "Search RNS Global",
+    "title": "Search RNS Global Partners",
     "hint": "Type to search · ↑↓ to navigate · Enter to open · Esc to close",
     "empty": "Start typing to search 71 services, 14 industries and our latest insights.",
     "none": "Nothing matched. Try “visa”, “Dubai company” or “study in Estonia”."
@@ -135,7 +136,7 @@
     "essentialNote": "Required for the site to function. Always on."
   },
   "chat": {
-    "title": "RNS Assistant",
+    "title": "RNS Partners Assistant",
     "subtitle": "Scripted answers · human handover",
     "placeholder": "Ask about visas, study, business…",
     "greeting": "Hello. I can point you to the right service or connect you with an advisor. What are you working on?",
@@ -164,7 +165,7 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "whatsapp": "Chat on WhatsApp",
-    "call": "Call RNS Global",
+    "call": "Call RNS Global Partners",
     "backToTop": "Back to top"
   },
   "topbar": {

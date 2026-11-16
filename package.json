@@ -1,9 +1,9 @@
 {
-  "name": "rns-global",
+  "name": "rns-global-partners",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "RNS Global \u2014 Expertise Without Borders. A one-stop global advisory and consultancy firm.",
+  "description": "RNS Global Partners — Expertise Without Borders. A one-stop global advisory and consultancy firm.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -40,7 +40,6 @@
     "react-hook-form": "^7.53.0",
     "react-i18next": "^15.0.1",
     "react-router-dom": "^6.26.2",
-    "recharts": "^2.12.7",
     "tailwind-merge": "^2.5.2",
     "three": "^0.168.0",
     "zod": "^3.23.8",

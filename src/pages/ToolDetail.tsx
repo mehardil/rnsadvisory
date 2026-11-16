@@ -12,7 +12,7 @@ import BusinessHoursTool from '@/components/tools/BusinessHoursTool'
 import EligibilityTool from '@/components/tools/EligibilityTool'
 import { getTool } from '@/data/tools'
 import { allServices } from '@/data/services'
-import { whatsappLink, phoneLink } from '@/utils/links'
+import { whatsappLink, phoneLink, consultationLink } from '@/utils/links'
 import { breadcrumbJsonLd, organizationJsonLd } from '@/utils/seo'
 import { getIcon } from '@/utils/icons'
 
@@ -101,15 +101,20 @@ export default function ToolDetail() {
                 <p className="mt-2 text-[0.76rem] leading-relaxed text-muted">
                   A 30-minute call is enough to confirm whether the estimate reflects your actual case.
                 </p>
-                <Link to="/contact#book" className="btn btn-gold btn-sm mt-4 w-full">
-                  Book a consultation <ArrowRight size={13} />
-                </Link>
+                <a
+                  href={consultationLink(`Hello RNS Global Partners, I used the ${tool.title} tool and would like to book a consultation.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-gold btn-sm mt-4 w-full"
+                >
+                  Book a Consultant Now <ArrowRight size={13} />
+                </a>
                 <div className="mt-2 grid grid-cols-2 gap-2">
                   <a href={phoneLink()} className="btn btn-outline btn-sm">
                     <Phone size={12} /> Call
                   </a>
                   <a
-                    href={whatsappLink(`Hello RNS Global, I used the ${tool.title} tool and have a question.`)}
+                    href={whatsappLink(`Hello RNS Global Partners, I used the ${tool.title} tool and have a question.`)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-outline btn-sm"

@@ -1,6 +1,7 @@
 import Seo from '@/components/Seo'
 import ExitIntent from '@/components/ExitIntent'
 import Hero from '@/sections/Hero'
+import PromiseStrip from '@/sections/PromiseStrip'
 import TrustStrip from '@/sections/TrustStrip'
 import WhatWeDo from '@/sections/WhatWeDo'
 import ServiceFinder from '@/sections/ServiceFinder'
@@ -11,6 +12,7 @@ import CaseStudiesSection from '@/sections/CaseStudiesSection'
 import WhyUs from '@/sections/WhyUs'
 import TestimonialsSection from '@/sections/TestimonialsSection'
 import InsightsSection from '@/sections/InsightsSection'
+import NewsletterSection from '@/sections/NewsletterSection'
 import FaqSection from '@/sections/FaqSection'
 import FinalCta from '@/sections/FinalCta'
 import { homeFaqs } from '@/data/faqs'
@@ -27,6 +29,7 @@ export default function Home() {
         jsonLd={[organizationJsonLd(), websiteJsonLd(), faqJsonLd(homeFaqs)]}
       />
       <Hero />
+      <PromiseStrip />
       <TrustStrip />
       <WhatWeDo />
       <ServiceFinder />
@@ -37,6 +40,7 @@ export default function Home() {
       <WhyUs />
       <TestimonialsSection />
       <InsightsSection />
+      <NewsletterSection />
       <FaqSection />
       <FinalCta />
       <ExitIntent />

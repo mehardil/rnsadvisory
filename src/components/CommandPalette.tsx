@@ -83,7 +83,7 @@ export default function CommandPalette() {
           onClick={() => setOpen(false)}
           role="dialog"
           aria-modal="true"
-          aria-label="Search RNS Global"
+          aria-label="Search RNS Global Partners"
         >
           <motion.div
             className="w-full max-w-2xl overflow-hidden rounded-2xl border border-ivory/15 bg-[color:var(--surface)] shadow-lift"

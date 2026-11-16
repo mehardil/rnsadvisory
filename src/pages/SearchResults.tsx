@@ -34,14 +34,14 @@ export default function SearchResults() {
     <>
       <Seo
         title={activeQuery ? `Search: ${activeQuery}` : 'Search'}
-        description="Search RNS Global services, industries, insights, offices and tools."
+        description="Search RNS Global Partners services, industries, insights, offices and tools."
         path="/search"
         noIndex
       />
       <PageHero
         eyebrow="Search"
         title="What are you looking for?"
-        description="Search across 71 services, 14 industries, nine offices, nine briefings and six free tools."
+        description="Search across 71 services, 14 industries, nineteen offices, nine briefings and six free tools."
         crumbs={[{ name: 'Search' }]}
         seed="search-hero"
         style="particles"

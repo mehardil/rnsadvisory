@@ -1,4 +1,4 @@
-# RNS Global Design System
+# RNS Global Partners Design System
 
 **Version 1.0 · October 2026**
 

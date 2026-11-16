@@ -3,4 +3,4 @@ Allow: /
 Disallow: /portal
 Disallow: /admin
 
-Sitemap: https://rnsglobal.example/sitemap.xml
+Sitemap: https://rnsglobalpartners.example/sitemap.xml

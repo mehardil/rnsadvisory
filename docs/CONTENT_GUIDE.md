@@ -12,12 +12,12 @@ Open `src/config/siteConfig.js`.
 
 ```js
 brand: {
-  name: 'RNS Global',           // wordmark and titles
-  legalName: 'RNS Global Advisory FZE',
+  name: 'RNS Global Partners',           // wordmark and titles
+  legalName: 'RNS Global Partners FZE',
   tagline: 'Expertise Without Borders.',
   subline: '…',
   description: '…',             // meta description, footer, schema
-  website: 'https://rnsglobal.example', // change before launch
+  website: 'https://rnsglobalpartners.example', // change before launch
   ...
 },
 contact: {

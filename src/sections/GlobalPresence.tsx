@@ -32,13 +32,13 @@ export default function GlobalPresence() {
               Eight regions. <em className="text-softgold">One accountable team.</em>
             </>
           }
-          description="Our Dubai headquarters coordinates every engagement. Regional teams in Jebel Ali, Riyadh, Mumbai, Lahore, London, Frankfurt, Tallinn and New York handle the work on the ground."
+          description="Our Dubai headquarters coordinates every engagement. Regional teams in Jebel Ali, Riyadh, Mumbai, Lahore, Tokyo, Osaka, Shanghai, Kuala Lumpur, London, Frankfurt, Tallinn, Budapest, New York, California, Florida, Winnipeg, Halifax and Toronto handle the work on the ground."
           action={{ label: 'All offices', to: '/locations' }}
         />
 
         <div className="mt-10 grid gap-6 lg:grid-cols-12">
           <Reveal className="lg:col-span-7">
-            <div className="relative overflow-hidden rounded-2xl border border-ivory/10 bg-[#050d1e]">
+            <div className="relative overflow-hidden rounded-2xl border border-ivory/10 bg-[#0a1830]">
               <div className="flex items-center justify-between border-b border-ivory/10 px-5 py-3">
                 <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-ivory/45">
                   Network map · Dubai hub
@@ -62,7 +62,7 @@ export default function GlobalPresence() {
                         type="button"
                         onClick={() => setSelectedId(office.id)}
                         className={cn(
-                          'flex w-full flex-col gap-1 bg-[#050d1e] px-4 py-3.5 text-left transition-colors hover:bg-ivory/5',
+                          'flex w-full flex-col gap-1 bg-[#0a1830] px-4 py-3.5 text-left transition-colors hover:bg-ivory/5',
                           office.id === selectedId && 'bg-ivory/[0.07]',
                         )}
                       >
@@ -96,8 +96,9 @@ export default function GlobalPresence() {
                   animate={false}
                   rounded="rounded-none"
                   className="h-full w-full"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a1a3a] to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#10264f] to-transparent" />
                 <span className="absolute left-4 top-4 rounded-full border border-gold/40 bg-navy/70 px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.16em] text-softgold backdrop-blur">
                   {selected.role}
                 </span>

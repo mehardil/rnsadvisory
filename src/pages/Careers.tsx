@@ -80,8 +80,8 @@ export default function Careers() {
   return (
     <>
       <Seo
-        title="Careers at RNS Global"
-        description="Join a cross-border advisory firm with real progression, learning budget, health cover and offices in Dubai, Riyadh, Lahore, Mumbai, London, Tallinn and New York."
+        title="Careers at RNS Global Partners"
+        description="Join a cross-border advisory firm with real progression, learning budget, health cover and offices in Dubai, Riyadh, Lahore, Mumbai, Tokyo, Osaka, Shanghai, Kuala Lumpur, London, Tallinn, Budapest, New York, California, Florida, Winnipeg, Halifax and Toronto."
         path="/careers"
         jsonLd={[
           organizationJsonLd(),
@@ -326,7 +326,7 @@ export default function Careers() {
                 <label className="mt-4 flex items-start gap-2.5">
                   <input type="checkbox" className="mt-0.5 h-4 w-4 accent-[#C9A24B]" {...register('consent')} />
                   <span className="text-[0.72rem] leading-relaxed text-muted">
-                    I agree to the privacy policy and to RNS Global storing this application for recruitment purposes.
+                    I agree to the privacy policy and to RNS Global Partners storing this application for recruitment purposes.
                   </span>
                 </label>
                 {errors.consent && <p className="field-error">{errors.consent.message}</p>}

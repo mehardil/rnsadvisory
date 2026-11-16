@@ -45,7 +45,7 @@ export default function NotFound() {
             <Link to="/services" className="btn btn-light-outline">
               <Compass size={15} /> Explore services
             </Link>
-            <a href={whatsappLink('Hello RNS Global, I hit a broken link on your site.')} target="_blank" rel="noopener noreferrer" className="btn btn-light-outline">
+            <a href={whatsappLink('Hello RNS Global Partners, I hit a broken link on your site.')} target="_blank" rel="noopener noreferrer" className="btn btn-light-outline">
               <MessageCircle size={15} /> WhatsApp
             </a>
           </div>

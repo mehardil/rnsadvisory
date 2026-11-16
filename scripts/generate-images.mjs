@@ -155,7 +155,7 @@ async function run() {
   if (only) entries = entries.filter(([key]) => key.includes(only))
   entries = entries.slice(0, Number.isFinite(limit) ? limit : entries.length)
 
-  console.log(`\nRNS Global — image generation`)
+  console.log(`\nRNS Global Partners — image generation`)
   console.log(`Provider: ${provider}${provider === 'openai' ? ` (${houseModel})` : ''}`)
   console.log(`Queue: ${entries.length} image(s)\n`)
 

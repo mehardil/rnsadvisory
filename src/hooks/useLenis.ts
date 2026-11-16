@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import Lenis from 'lenis'
-import { usePrefersReducedMotion } from './useMediaQuery'
+import { useMediaQuery, usePrefersReducedMotion } from './useMediaQuery'
 
 /**
  * Lenis smooth scrolling, wired into GSAP ScrollTrigger when it is present.
@@ -8,9 +8,10 @@ import { usePrefersReducedMotion } from './useMediaQuery'
  */
 export function useLenis(enabled = true) {
   const reduced = usePrefersReducedMotion()
+  const isMobile = useMediaQuery('(max-width: 767px)')
 
   useEffect(() => {
-    if (!enabled || reduced) return
+    if (!enabled || reduced || isMobile) return
     const lenis = new Lenis({
       duration: 1.05,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -55,5 +56,5 @@ export function useLenis(enabled = true) {
       lenis.destroy()
       delete (window as unknown as { __lenis?: Lenis }).__lenis
     }
-  }, [enabled, reduced])
+  }, [enabled, reduced, isMobile])
 }

@@ -21,12 +21,12 @@ import { serviceCategories } from '@/data/services'
 import { useUIStore } from '@/store/useUIStore'
 import { useHeaderBehaviour } from '@/hooks/useHeaderBehaviour'
 import { useScrollLock } from '@/hooks/useInteractions'
-import { whatsappLink, mailLink, phoneLink } from '@/utils/links'
+import { whatsappLink, mailLink, phoneLink, consultationLink } from '@/utils/links'
 import { getIcon } from '@/utils/icons'
 import { cn } from '@/utils/cn'
 import Logo from './Logo'
 import ArtFrame from './ArtFrame'
-import { ButtonLink } from './Button'
+import { ButtonAnchor } from './Button'
 
 const featuredService = serviceCategories.find((c) => c.slug === 'immigration')?.services.find((s) => s.slug === 'golden-visa')
 
@@ -227,9 +227,16 @@ export default function Header() {
               {siteConfig.contact.phoneDisplay}
             </a>
             <div className="hidden lg:block">
-              <ButtonLink to={siteConfig.links.book} variant="gold" size="sm" className="!px-4">
+              <ButtonAnchor
+                href={consultationLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="gold"
+                size="sm"
+                className="!px-4"
+              >
                 {t('cta.bookShort')}
-              </ButtonLink>
+              </ButtonAnchor>
             </div>
             <button
               type="button"
@@ -497,9 +504,16 @@ export default function Header() {
             </div>
 
             <div className="shrink-0 border-t border-ivory/10 bg-navy/95 p-4" style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}>
-              <ButtonLink to={siteConfig.links.book} variant="gold" className="w-full" onClick={() => setMobileOpen(false)}>
+              <ButtonAnchor
+                href={consultationLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="gold"
+                className="w-full"
+                onClick={() => setMobileOpen(false)}
+              >
                 {t('cta.book')} <ArrowRight size={15} />
-              </ButtonLink>
+              </ButtonAnchor>
               <div className="mt-3 grid grid-cols-3 gap-2 text-center">
                 <a href={phoneLink()} className="flex flex-col items-center gap-1 rounded-lg border border-ivory/10 py-2 text-[0.62rem] text-ivory/65">
                   <Phone size={15} /> Call

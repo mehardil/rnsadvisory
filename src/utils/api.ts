@@ -40,7 +40,7 @@ export async function submitForm({ formName, honeypot, payload }: SubmitOptions)
     const res = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ ...cleanPayload, _form: formName, _subject: `RNS Global — ${formName}` }),
+      body: JSON.stringify({ ...cleanPayload, _form: formName, _subject: `RNS Global Partners — ${formName}` }),
     })
     if (!res.ok) throw new Error('We could not send your message. Please call or WhatsApp us instead.')
     return { ok: true, demo: false }

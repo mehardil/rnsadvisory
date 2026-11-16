@@ -4,7 +4,7 @@
  */
 export const homeFaqs = [
   {
-    q: 'What exactly does RNS Global do?',
+    q: 'What exactly does RNS Global Partners do?',
     a: 'We are a one-stop advisory firm. That means education and study abroad, travel, visas and relocation, business setup, strategy, finance and tax, legal and compliance, trade and logistics, HR, technology, real estate and specialised sector advisory. You get one accountable team instead of five unconnected providers.',
   },
   {

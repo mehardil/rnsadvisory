@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom'
 import { CalendarCheck, MessageCircle, Phone } from 'lucide-react'
 import siteConfig from '@/config/siteConfig'
-import { whatsappLink, phoneLink } from '@/utils/links'
+import { whatsappLink, phoneLink, consultationLink } from '@/utils/links'
 
 /** Sticky mobile action bar. Always one tap from a human. */
 export default function MobileBottomBar() {
@@ -30,13 +29,15 @@ export default function MobileBottomBar() {
           <MessageCircle size={17} />
           WhatsApp
         </a>
-        <Link
-          to="/contact#book"
+        <a
+          href={consultationLink()}
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex flex-col items-center gap-1 bg-gold py-2.5 text-[0.62rem] font-semibold text-navy"
         >
           <CalendarCheck size={17} />
           Book
-        </Link>
+        </a>
       </div>
     </nav>
   )

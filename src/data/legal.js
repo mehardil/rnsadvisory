@@ -7,7 +7,7 @@ export const legalPages = {
     title: 'Privacy Policy',
     updated: '1 October 2026',
     summary:
-      'How RNS Global collects, uses, shares and protects personal information when you use this website or engage our services.',
+      'How RNS Global Partners collects, uses, shares and protects personal information when you use this website or engage our services.',
     sections: [
       {
         heading: 'Who we are',
@@ -75,7 +75,7 @@ export const legalPages = {
     title: 'Terms of Service',
     updated: '1 October 2026',
     summary:
-      'The terms that govern your use of this website and the basis on which RNS Global provides advisory services.',
+      'The terms that govern your use of this website and the basis on which RNS Global Partners provides advisory services.',
     sections: [
       {
         heading: 'Use of this website',
@@ -107,7 +107,7 @@ export const legalPages = {
       {
         heading: 'Intellectual property',
         paragraphs: [
-          'The RNS Global name, logo, site design, text and generated artwork are protected by intellectual-property laws. You may view and print pages for personal or internal business use. You may not reproduce, republish or create derivative works without written permission.',
+          'The RNS Global Partners name, logo, site design, text and generated artwork are protected by intellectual-property laws. You may view and print pages for personal or internal business use. You may not reproduce, republish or create derivative works without written permission.',
           'Documents we prepare for you under an engagement may be used for the purpose for which they were prepared.',
         ],
       },
@@ -215,7 +215,7 @@ export const legalPages = {
       {
         heading: 'Limitation of liability',
         paragraphs: [
-          'To the extent permitted by law, RNS Global accepts no liability for loss arising from reliance on general information on this website. Our liability for engaged services is governed by the relevant engagement letter and the Terms of Service.',
+          'To the extent permitted by law, RNS Global Partners accepts no liability for loss arising from reliance on general information on this website. Our liability for engaged services is governed by the relevant engagement letter and the Terms of Service.',
         ],
       },
     ],

@@ -1,9 +1,8 @@
-import { Link } from 'react-router-dom'
 import { ArrowRight, CalendarCheck, MessageCircle, Phone } from 'lucide-react'
 import siteConfig from '@/config/siteConfig'
 import ArtFrame from '@/components/ArtFrame'
 import Reveal from '@/components/Reveal'
-import { whatsappLink, phoneLink } from '@/utils/links'
+import { whatsappLink, phoneLink, consultationLink } from '@/utils/links'
 
 export default function FinalCta() {
   return (
@@ -31,14 +30,19 @@ export default function FinalCta() {
             to achieve and what is getting in the way. We will tell you honestly what we would do next.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Link to={siteConfig.links.book} className="btn btn-gold">
-              <CalendarCheck size={16} /> Book a free consultation
-            </Link>
+            <a
+              href={consultationLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-gold"
+            >
+              <CalendarCheck size={16} /> Book a Consultant Now
+            </a>
             <a href={phoneLink()} className="btn btn-light-outline">
               <Phone size={15} /> {siteConfig.contact.phoneDisplay}
             </a>
             <a
-              href={whatsappLink('Hello RNS Global, I would like to speak to an advisor.')}
+              href={whatsappLink('Hello RNS Global Partners, I would like to speak to an advisor.')}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-light-outline"
