@@ -207,13 +207,19 @@ export default function Header() {
         </div>
       )}
 
-      <div
-        className={cn(
-          'border-b transition-all duration-300',
-          solid ? 'header-solid border-[color:var(--hair)] shadow-[0_10px_30px_-24px_rgba(10,26,58,0.5)]' : 'border-transparent bg-transparent',
-        )}
-        onMouseLeave={closeMega}
-      >
+        <div
+          className={cn(
+            'relative border-b transition-all duration-300',
+            solid ? 'header-solid border-[color:var(--hair)] shadow-[0_10px_30px_-24px_rgba(10,26,58,0.5)]' : 'border-transparent bg-transparent',
+          )}
+          onMouseLeave={closeMega}
+        >
+          {!solid && (
+            <div
+              className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-navy/85 via-navy/40 to-transparent"
+              aria-hidden="true"
+            />
+          )}
         <div className="container-x flex h-[78px] items-center gap-3 lg:gap-5">
           <div className="shrink-0">
             <Logo tone={lightText ? 'light' : 'dark'} />
