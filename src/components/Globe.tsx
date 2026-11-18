@@ -482,12 +482,12 @@ export default function Globe({ offices, hub, selectedId, onSelect, className }:
         role="img"
         aria-label="Interactive globe showing RNS Global Partners offices. Arcs connect the Dubai headquarters to each regional office. A list view follows below."
       />
-      <div className="pointer-events-none absolute bottom-3 left-3 flex items-center gap-4 font-mono text-[9px] uppercase tracking-[0.14em] text-ivory/45">
+      <div className="pointer-events-none absolute bottom-3 left-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ivory/60 md:text-[11px]">
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-softgold" /> Hub — Dubai
+          <span className="h-2 w-2 rounded-full bg-softgold" /> Hub — Dubai
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-gold/60" /> Regional office
+          <span className="h-2 w-2 rounded-full bg-gold/70" /> Regional office
         </span>
         <span className="hidden sm:inline">Drag to rotate · Click a marker</span>
       </div>
