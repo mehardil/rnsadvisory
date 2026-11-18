@@ -5,7 +5,11 @@ import { AnimatePresence, motion } from 'framer-motion'
 import {
   ArrowRight,
   ChevronDown,
+  Clock,
+  Facebook,
   Globe,
+  Instagram,
+  Linkedin,
   Mail,
   Menu,
   MessageCircle,
@@ -26,6 +30,7 @@ import { getIcon } from '@/utils/icons'
 import { cn } from '@/utils/cn'
 import Logo from './Logo'
 import ArtFrame from './ArtFrame'
+import { MetaIcon, WhatsAppIcon } from './SocialIcons'
 import { ButtonAnchor } from './Button'
 
 const featuredService = serviceCategories.find((c) => c.slug === 'immigration')?.services.find((s) => s.slug === 'golden-visa')
@@ -52,6 +57,7 @@ export default function Header() {
   const solid = scrolled || megaOpen
   const lightText = !solid
   const primaryCategories = serviceCategories.slice(0, 6)
+  const socialHref = (id: string) => siteConfig.socials.find((social) => social.id === id)?.href ?? '#'
 
   useEffect(() => {
     setMegaOpen(false)
@@ -108,6 +114,75 @@ export default function Header() {
         hidden && !megaOpen ? '-translate-y-full' : 'translate-y-0',
       )}
     >
+      <div className="relative z-10 hidden border-b border-ivory/10 bg-navy md:block">
+        <div className="container-x flex h-9 items-center justify-between gap-4 text-[0.68rem] text-ivory/60">
+          <div className="flex min-w-0 items-center gap-4">
+            <a href={mailLink()} className="inline-flex items-center gap-1.5 truncate transition-colors hover:text-softgold">
+              <Mail size={12} className="shrink-0" /> {siteConfig.contact.email}
+            </a>
+            <span className="hidden h-3 w-px shrink-0 bg-ivory/15 lg:block" />
+            <span className="hidden items-center gap-1.5 lg:inline-flex">
+              <Clock size={12} className="shrink-0 text-gold/70" /> {siteConfig.contact.hours}
+            </span>
+          </div>
+          <div className="flex shrink-0 items-center gap-4">
+            <a
+              href={whatsappLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-softgold"
+            >
+              <WhatsAppIcon size={13} className="text-[#25D366]" /> WhatsApp
+            </a>
+            <a
+              href={phoneLink()}
+              className="inline-flex items-center gap-1.5 font-semibold text-ivory/80 transition-colors hover:text-softgold"
+            >
+              <Phone size={12} /> {siteConfig.contact.phoneDisplay}
+            </a>
+            <span className="h-3 w-px bg-ivory/15" />
+            <div className="flex items-center gap-0.5">
+              <a
+                href={socialHref('instagram')}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="flex h-6 w-6 items-center justify-center rounded-full transition-colors hover:bg-ivory/10 hover:text-softgold"
+              >
+                <Instagram size={13} />
+              </a>
+              <a
+                href={socialHref('meta')}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Meta"
+                className="flex h-6 w-6 items-center justify-center rounded-full transition-colors hover:bg-ivory/10 hover:text-softgold"
+              >
+                <MetaIcon size={14} />
+              </a>
+              <a
+                href={socialHref('facebook')}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="flex h-6 w-6 items-center justify-center rounded-full transition-colors hover:bg-ivory/10 hover:text-softgold"
+              >
+                <Facebook size={13} />
+              </a>
+              <a
+                href={socialHref('linkedin')}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="flex h-6 w-6 items-center justify-center rounded-full transition-colors hover:bg-ivory/10 hover:text-softgold"
+              >
+                <Linkedin size={13} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {showAnnouncement && !scrolled && (
         <div className="relative bg-gold text-navy">
           <div className="container-x flex items-center justify-center gap-3 py-2 text-center">
@@ -139,7 +214,7 @@ export default function Header() {
         )}
         onMouseLeave={closeMega}
       >
-        <div className="container-x flex h-[70px] items-center gap-3 lg:gap-5">
+        <div className="container-x flex h-[78px] items-center gap-3 lg:gap-5">
           <div className="shrink-0">
             <Logo tone={lightText ? 'light' : 'dark'} />
           </div>
@@ -216,16 +291,6 @@ export default function Header() {
             >
               {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
             </button>
-            <a
-              href={phoneLink()}
-              className={cn(
-                'hidden shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 text-[0.74rem] font-medium min-[1360px]:flex',
-                lightText ? 'text-ivory/80 hover:text-ivory' : 'text-muted hover:text-ink',
-              )}
-            >
-              <Phone size={14} />
-              {siteConfig.contact.phoneDisplay}
-            </a>
             <div className="hidden lg:block">
               <ButtonAnchor
                 href={consultationLink()}
@@ -375,7 +440,7 @@ export default function Header() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[140] flex h-[100dvh] flex-col bg-navy text-ivory xl:hidden"
           >
-            <div className="container-x flex h-[70px] shrink-0 items-center justify-between border-b border-ivory/10">
+            <div className="container-x flex h-[78px] shrink-0 items-center justify-between border-b border-ivory/10">
               <Logo tone="light" />
               <button
                 type="button"

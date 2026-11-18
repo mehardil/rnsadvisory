@@ -44,8 +44,8 @@ export default function CustomCursor() {
       raf = requestAnimationFrame(loop)
       ringPos.x += (target.x - ringPos.x) * 0.16
       ringPos.y += (target.y - ringPos.y) * 0.16
-      dot.style.transform = `translate3d(${target.x - 2}px, ${target.y - 2}px, 0)`
-      ring.style.transform = `translate3d(${ringPos.x - 14}px, ${ringPos.y - 14}px, 0)`
+      dot.style.transform = `translate3d(${target.x}px, ${target.y}px, 0) translate(-50%, -50%)`
+      ring.style.transform = `translate3d(${ringPos.x}px, ${ringPos.y}px, 0) translate(-50%, -50%)`
     }
 
     window.addEventListener('mousemove', onMove, { passive: true })
@@ -66,11 +66,11 @@ export default function CustomCursor() {
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-[150] hidden lg:block">
       <div
         ref={dotRef}
-        className="absolute h-1 w-1 rounded-full bg-gold opacity-0 transition-opacity duration-200"
+        className="absolute left-0 top-0 h-1 w-1 rounded-full bg-gold opacity-0 transition-opacity duration-200"
       />
       <div
         ref={ringRef}
-        className="absolute h-7 w-7 rounded-full border border-gold/40 opacity-0 transition-[width,height,border-color,opacity] duration-200"
+        className="absolute left-0 top-0 h-7 w-7 rounded-full border border-gold/40 opacity-0 transition-[width,height,border-color,opacity] duration-200"
       />
     </div>
   )

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 import { featuredServices } from '@/data/services'
-import { usePrefersReducedMotion } from '@/hooks/useMediaQuery'
+import { useMediaQuery, usePrefersReducedMotion } from '@/hooks/useMediaQuery'
 import { cn } from '@/utils/cn'
 import ArtFrame from './ArtFrame'
 import IsoBadge, { toneFor } from './IsoBadge'
@@ -17,7 +17,8 @@ export default function ServiceOrbit({ className }: { className?: string }) {
   const pausedRef = useRef(false)
   const angleRef = useRef(0)
   const reduced = usePrefersReducedMotion()
-  const services = useMemo(() => featuredServices.slice(0, 8), [])
+  const compact = useMediaQuery('(max-width: 767px)')
+  const services = useMemo(() => featuredServices.slice(0, compact ? 6 : 8), [compact])
 
   useEffect(() => {
     const wrap = wrapRef.current
@@ -91,20 +92,20 @@ export default function ServiceOrbit({ className }: { className?: string }) {
 
       {/* Central core */}
       <div className="absolute left-1/2 top-1/2 z-[60] -translate-x-1/2 -translate-y-1/2">
-        <div className="relative flex h-36 w-36 items-center justify-center rounded-full border border-gold/30 bg-navy/80 shadow-[0_0_80px_-10px_rgba(201,162,75,0.45)] backdrop-blur-xl md:h-44 md:w-44">
+        <div className="relative flex h-36 w-36 items-center justify-center rounded-full border border-gold/30 bg-navy/80 shadow-[0_0_80px_-10px_rgba(201,162,75,0.45)] backdrop-blur-xl md:h-52 md:w-52">
           <ArtFrame
             seed="service-orbit-core"
             imageKey="service-orbit"
             alt=""
             animate
             rounded="rounded-full"
-            className="absolute inset-2 h-[calc(100%-1rem)] w-[calc(100%-1rem)] opacity-60"
+            className="absolute inset-2 h-[calc(100%-1rem)] w-[calc(100%-1rem)] opacity-50"
             cycleMs={20_000}
           />
-          <div className="relative z-10 text-center">
-            <p className="font-display text-3xl text-ivory md:text-4xl">71</p>
-            <p className="mt-1 font-mono text-[8.5px] uppercase tracking-[0.2em] text-softgold">Services</p>
-            <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.18em] text-ivory/45">12 practices</p>
+          <div className="relative z-10 text-center drop-shadow-[0_1px_8px_rgba(6,15,34,0.85)]">
+            <p className="font-display text-4xl leading-none text-ivory md:text-5xl">71</p>
+            <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-softgold md:text-[12px]">Services</p>
+            <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.14em] text-ivory/70 md:text-[11px]">12 practices</p>
           </div>
         </div>
       </div>
@@ -119,7 +120,7 @@ export default function ServiceOrbit({ className }: { className?: string }) {
             to={service.path || '#'}
             onFocus={() => (pausedRef.current = true)}
             onBlur={() => (pausedRef.current = false)}
-            className="group absolute left-1/2 top-1/2 flex w-[132px] flex-col items-center gap-2 will-change-transform md:w-[148px]"
+            className="group absolute left-1/2 top-1/2 flex w-[128px] flex-col items-center gap-2 will-change-transform md:w-[168px]"
             aria-label={`${service.title} — ${service.categoryTitle}`}
           >
             <IsoBadge
@@ -129,7 +130,7 @@ export default function ServiceOrbit({ className }: { className?: string }) {
               orbit={false}
               className="transition-transform duration-300 group-hover:scale-110"
             />
-            <span className="rounded-full border border-ivory/10 bg-navy/70 px-2.5 py-1 text-center text-[9.5px] font-medium leading-tight text-ivory/80 backdrop-blur-sm transition-colors group-hover:border-gold/40 group-hover:text-softgold">
+            <span className="rounded-full border border-ivory/10 bg-navy/70 px-2.5 py-1 text-center text-[10px] font-medium leading-tight text-ivory/85 backdrop-blur-sm transition-colors group-hover:border-gold/40 group-hover:text-softgold md:text-[13px]">
               {service.title}
             </span>
             <ArrowUpRight

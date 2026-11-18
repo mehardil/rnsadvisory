@@ -79,7 +79,7 @@ export default function QuoteForm({ serviceName }: { serviceName: string }) {
           <label htmlFor="quote-phone" className="field-label">
             Phone / WhatsApp
           </label>
-          <input id="quote-phone" type="tel" className="input" placeholder="+92 331 905 1913" autoComplete="tel" {...register('phone')} />
+          <input id="quote-phone" type="tel" className="input" placeholder="+971 55 539 6858" autoComplete="tel" {...register('phone')} />
           {errors.phone && <p className="field-error">{errors.phone.message}</p>}
         </div>
         <div>

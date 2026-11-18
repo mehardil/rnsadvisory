@@ -24,9 +24,9 @@ export default function WhatWeDo() {
         <SectionHeading
           eyebrow="What we do"
           title={
-            <>
-              One firm. Every advisory <em>you need.</em>
-            </>
+            <span className="font-sans font-semibold tracking-[0.045em] [font-variant-ligatures:none]">
+              One firm. Every advisory <em className="italic text-gold-ink">you need.</em>
+            </span>
           }
           description="Twelve practices connected by one client charter. Start with a single need and we will coordinate the rest — visas, entities, finance, legal, people and technology."
           action={{ label: 'All 71 services', to: '/services' }}

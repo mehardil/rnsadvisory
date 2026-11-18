@@ -72,8 +72,8 @@ export default function TrustStrip() {
         </div>
 
         <div className="mt-12 border-t border-[color:var(--hair)] pt-7 md:mt-14">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-8">
-            <p className="shrink-0 font-mono text-[9px] uppercase tracking-[0.16em] text-faint">
+          <div className="flex flex-col gap-4">
+            <p className="whitespace-nowrap font-mono text-[9px] uppercase tracking-[0.16em] text-faint">
               Working alongside
             </p>
             <Marquee items={siteConfig.trustLogos} className="mask-fade w-full" />

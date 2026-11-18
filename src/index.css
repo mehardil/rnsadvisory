@@ -593,8 +593,8 @@ body::after {
 
 /* Soft edge mask for marquees and horizontal strips. */
 .mask-fade {
-  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, #000 0%, #000 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 90%, transparent);
 }
 
 /* Sticky offsets so anchors clear the fixed header. */

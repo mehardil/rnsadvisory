@@ -15,7 +15,7 @@ export default function Logo({ className, tone = 'light', compact = false, linke
     <span className={cn('group inline-flex items-center gap-3', className)} style={{ color: ink }}>
       <svg
         viewBox="0 0 48 48"
-        className="h-9 w-9 shrink-0 transition-transform duration-500 group-hover:rotate-[-6deg]"
+        className="h-10 w-10 shrink-0 transition-transform duration-500 group-hover:rotate-[-6deg]"
         aria-hidden="true"
       >
         <rect x="0.5" y="0.5" width="47" height="47" rx="11" fill="none" stroke="#C9A24B" strokeOpacity="0.55" />
@@ -31,10 +31,10 @@ export default function Logo({ className, tone = 'light', compact = false, linke
       </svg>
       {!compact && (
         <span className="flex flex-col leading-none">
-          <span className="whitespace-nowrap font-display text-[1.1rem] font-medium tracking-[-0.03em]">
+          <span className="whitespace-nowrap font-display text-[1.15rem] font-medium tracking-[-0.01em] sm:text-[1.25rem] xl:text-[1.3rem]">
             {siteConfig.brand.name}
           </span>
-          <span className="mt-1.5 flex items-center gap-1.5 font-mono text-[7.5px] uppercase tracking-[0.3em] text-gold">
+          <span className="mt-1.5 flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.3em] text-gold">
             <span className="h-px w-3 bg-gold/60" />
             Since 2011
           </span>

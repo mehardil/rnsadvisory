@@ -33,7 +33,7 @@ export const homeFaqs = [
   },
   {
     q: 'Can I speak to someone before committing?',
-    a: 'Always. The first consultation is free for students and entrepreneurs. Call or WhatsApp +92 331 905 1913, email mehardil13302@gmail.com, or book a slot on the contact page.',
+    a: 'Always. The first consultation is free for students and entrepreneurs. Call or WhatsApp +971 55 539 6858, email advisor@rnsglobalpartner.com, or book a slot on the contact page.',
   },
 ]
 

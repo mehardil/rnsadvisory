@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { useState } from 'react'
+import type { ComponentType } from 'react'
 import {
   ArrowUp,
   Facebook,
@@ -22,13 +23,15 @@ import GenerativeArt from './GenerativeArt'
 import Logo from './Logo'
 import NewsletterForm from './NewsletterForm'
 import CTASection from './CTASection'
+import { MetaIcon, WhatsAppIcon } from './SocialIcons'
 
-const socialIcons: Record<string, typeof Linkedin> = {
+const socialIcons: Record<string, ComponentType<{ size?: number | string; className?: string }>> = {
   linkedin: Linkedin,
   facebook: Facebook,
   instagram: Instagram,
   youtube: Youtube,
-  whatsapp: MessageCircle,
+  whatsapp: WhatsAppIcon,
+  meta: MetaIcon,
   tiktok: Music2,
 }
 
@@ -68,7 +71,7 @@ export default function Footer() {
           </button>
 
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-4">
               <Logo tone="light" linked />
               <p className="mt-5 max-w-xs text-[0.8rem] leading-relaxed text-ivory/55">{siteConfig.footer.description}</p>
               <div className="mt-5 flex flex-wrap gap-2">
@@ -148,7 +151,7 @@ export default function Footer() {
               </ul>
             </div>
 
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-2">
               <h3 className="font-mono text-[10px] uppercase tracking-[0.18em] text-softgold">{t('footer.contact')}</h3>
               <ul className="mt-4 space-y-3 text-[0.78rem]">
                 <li>

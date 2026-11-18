@@ -25,7 +25,8 @@ export default function Hero() {
           animate={false}
           priority
           rounded="rounded-none"
-          className="absolute inset-0 h-full w-full opacity-35"
+          className="absolute inset-0 h-full w-full opacity-80"
+          imageClassName="scale-100 contrast-[1.08] saturate-[1.15]"
         />
       )}
 
@@ -46,11 +47,12 @@ export default function Hero() {
           animate={false}
           priority
           rounded="rounded-none"
-          className="absolute inset-0 h-full w-full opacity-45 md:left-[40%]"
+          className="absolute inset-0 h-full w-full opacity-60 md:left-[40%]"
+          imageClassName="scale-100 contrast-[1.08] saturate-[1.15]"
         />
       )}
 
-      <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/20" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/65 to-transparent" aria-hidden="true" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy to-transparent" aria-hidden="true" />
 
       <div className="container-x relative z-10 flex min-h-[100svh] flex-col justify-center pb-24 pt-32 md:pt-36">

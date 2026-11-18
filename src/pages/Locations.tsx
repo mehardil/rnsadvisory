@@ -280,11 +280,11 @@ export default function Locations() {
               </p>
               <p className="flex items-center gap-2 text-muted">
                 <Phone size={14} className="shrink-0 text-gold-ink" />
-                <a href="tel:+923319051913" className="hover:text-gold-ink">+92 331 905 1913</a>
+                <a href="tel:+971555396858" className="hover:text-gold-ink">+971 55 539 6858</a>
               </p>
               <p className="flex items-center gap-2 text-muted">
                 <Mail size={14} className="shrink-0 text-gold-ink" />
-                <a href="mailto:mehardil13302@gmail.com" className="break-all hover:text-gold-ink">mehardil13302@gmail.com</a>
+                <a href="mailto:advisor@rnsglobalpartner.com" className="break-all hover:text-gold-ink">advisor@rnsglobalpartner.com</a>
               </p>
               <p className="flex items-center gap-2 text-muted">
                 <Clock size={14} className="shrink-0 text-gold-ink" /> Monday–Saturday, 09:00–19:00 GST

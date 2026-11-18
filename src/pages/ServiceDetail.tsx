@@ -415,7 +415,7 @@ export default function ServiceDetail() {
                 <p className="mono-label">Prefer to talk?</p>
                 <div className="mt-3 space-y-2">
                   <a href={phoneLink()} className="flex items-center gap-2.5 rounded-lg border border-[color:var(--hair)] px-3 py-2.5 text-[0.78rem] text-ink transition-colors hover:border-gold">
-                    <Phone size={14} className="text-gold-ink" /> +92 331 905 1913
+                    <Phone size={14} className="text-gold-ink" /> +971 55 539 6858
                   </a>
                   <a
                     href={whatsappLink(`Hello RNS Global Partners, I have a question about ${service.title}.`)}

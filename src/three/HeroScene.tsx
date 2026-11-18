@@ -119,8 +119,8 @@ function Scene() {
       <directionalLight position={[4, 5, 6]} intensity={2.1} color="#cfe0ff" />
       <pointLight position={[-5, -2, 3]} intensity={18} color="#C9A24B" distance={14} />
       <Globe />
-      <EffectComposer multisampling={0}>
-        <Bloom intensity={0.85} luminanceThreshold={0.22} luminanceSmoothing={0.5} mipmapBlur />
+      <EffectComposer multisampling={4}>
+        <Bloom intensity={0.55} luminanceThreshold={0.28} luminanceSmoothing={0.4} mipmapBlur />
       </EffectComposer>
     </>
   )
@@ -133,7 +133,7 @@ export default function HeroScene() {
       dpr={[1, 2]}
       frameloop={reduced ? 'demand' : 'always'}
       camera={{ position: [0, 0, 6], fov: 42 }}
-      gl={{ antialias: false, powerPreference: 'high-performance', alpha: true }}
+      gl={{ antialias: true, powerPreference: 'high-performance', alpha: true }}
       style={{ pointerEvents: 'none' }}
       aria-hidden="true"
     >

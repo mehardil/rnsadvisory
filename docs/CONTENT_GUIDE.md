@@ -21,10 +21,10 @@ brand: {
   ...
 },
 contact: {
-  phone: '+923319051913',       // used in tel: links and schema
-  phoneDisplay: '+92 331 905 1913',
-  email: 'mehardil13302@gmail.com',
-  whatsapp: '923319051913',     // digits only, no +
+  phone: '+971555396858',       // used in tel: links and schema
+  phoneDisplay: '+971 55 539 6858',
+  email: 'advisor@rnsglobalpartner.com',
+  whatsapp: '971555396858',     // digits only, no +
   hours: 'Monday–Saturday, 09:00–19:00 GST',
   ...
 }
@@ -104,8 +104,8 @@ Each office requires:
   lat: 25.2048,
   lng: 55.2708,
   timezone: 'Asia/Dubai',      // IANA time zone
-  phone: '+923319051913',
-  email: 'mehardil13302@gmail.com',
+  phone: '+971555396858',
+  email: 'advisor@rnsglobalpartner.com',
   address: '…',
   hours: 'Mon–Sat · 09:00–19:00 GST', // parsed for open/closed status
   since: 2011,

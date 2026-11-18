@@ -72,6 +72,8 @@ export default function Globe({ offices, hub, selectedId, onSelect, className }:
     let visible = true
     let last = 0
     let idle = 0
+    let labelFontPx = 11
+    const labelWidths: Record<string, number> = {}
 
     const dots = (() => {
       const rand = createRandom('globe-dots-v2')
@@ -91,6 +93,14 @@ export default function Globe({ offices, hub, selectedId, onSelect, className }:
 
     const hubVec = toVec(hub.lat, hub.lng)
 
+    const measureLabels = () => {
+      labelFontPx = Math.max(10, Math.min(12, Math.round(w / 58)))
+      ctx.font = `600 ${labelFontPx}px "JetBrains Mono", monospace`
+      for (const office of offices) {
+        labelWidths[office.id] = ctx.measureText(office.city.toUpperCase()).width
+      }
+    }
+
     const resize = () => {
       const rect = wrap.getBoundingClientRect()
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
@@ -101,6 +111,7 @@ export default function Globe({ offices, hub, selectedId, onSelect, className }:
       canvas.style.width = `${w}px`
       canvas.style.height = `${h}px`
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      measureLabels()
       draw(performance.now())
     }
 
@@ -249,6 +260,15 @@ export default function Globe({ offices, hub, selectedId, onSelect, className }:
 
       // Markers
       const hits: { id: string; x: number; y: number }[] = []
+      const labels: {
+        id: string
+        city: string
+        x: number
+        y: number
+        z: number
+        emphasis: boolean
+        isHub: boolean
+      }[] = []
       for (const office of offices) {
         const p = project(office.lat, office.lng, rot, cx, cy, radius)
         if (p.z <= 0) continue
@@ -256,10 +276,11 @@ export default function Globe({ offices, hub, selectedId, onSelect, className }:
         const isSelected = selectedId === office.id
         const isHover = hoveredRef.current === office.id
         const isHub = office.isHQ
+        const emphasis = isHub || isSelected || isHover
         const size = isHub ? 5.2 : 3.4
         const alpha = 0.35 + p.z * 0.65
 
-        if (isHub || isSelected || isHover) {
+        if (emphasis) {
           ctx.strokeStyle = `rgba(232,214,160,${0.18 + p.z * 0.42})`
           ctx.lineWidth = 1
           const pulse = isHub ? 8 + Math.sin(now * 0.002) * 3 : 7
@@ -268,19 +289,103 @@ export default function Globe({ offices, hub, selectedId, onSelect, className }:
           ctx.stroke()
         }
 
-        ctx.fillStyle = isHub
-          ? 'rgba(255,236,190,0.98)'
-          : `rgba(201,162,75,${alpha})`
+        ctx.fillStyle = isHub ? 'rgba(255,236,190,0.98)' : `rgba(201,162,75,${alpha})`
         ctx.beginPath()
         ctx.arc(p.x, p.y, isSelected || isHover ? size + 1.4 : size, 0, Math.PI * 2)
         ctx.fill()
 
-        if (isHub || isSelected || isHover || p.z > 0.55) {
-          ctx.font = '500 9px "JetBrains Mono", monospace'
-          ctx.fillStyle = isHub ? 'rgba(255,236,190,0.95)' : `rgba(232,214,160,${0.45 + p.z * 0.5})`
-          ctx.textAlign = 'left'
-          ctx.fillText(office.city.toUpperCase(), p.x + 8, p.y + 3)
+        if (emphasis || p.z > 0.14) {
+          labels.push({
+            id: office.id,
+            city: office.city.toUpperCase(),
+            x: p.x,
+            y: p.y,
+            z: p.z,
+            emphasis,
+            isHub,
+          })
         }
+      }
+
+      // Labels: front-most first, emphasised offices always win. Candidate
+      // positions are tried around each marker so names never overlap.
+      labels.sort((a, b) => Number(b.emphasis) - Number(a.emphasis) || b.z - a.z)
+      const placed: { x: number; y: number; w: number; h: number }[] = []
+      const overlaps = (a: (typeof placed)[number], b: (typeof placed)[number]) =>
+        a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y
+      const roundRect = (x: number, y: number, rw: number, rh: number, rr: number) => {
+        ctx.beginPath()
+        ctx.moveTo(x + rr, y)
+        ctx.arcTo(x + rw, y, x + rw, y + rh, rr)
+        ctx.arcTo(x + rw, y + rh, x, y + rh, rr)
+        ctx.arcTo(x, y + rh, x, y, rr)
+        ctx.arcTo(x, y, x + rw, y, rr)
+        ctx.closePath()
+      }
+      const padX = 7
+      const padY = 4
+      const boxH = labelFontPx + padY * 2
+      ctx.font = `600 ${labelFontPx}px "JetBrains Mono", monospace`
+
+      for (const label of labels) {
+        const textW = labelWidths[label.id] ?? ctx.measureText(label.city).width
+        const boxW = textW + padX * 2
+        const candidates = [
+          { x: label.x + 10, y: label.y - boxH / 2 },
+          { x: label.x - 10 - boxW, y: label.y - boxH / 2 },
+          { x: label.x + 10, y: label.y - boxH - 8 },
+          { x: label.x + 10, y: label.y + 8 },
+          { x: label.x - 10 - boxW, y: label.y - boxH - 8 },
+          { x: label.x - 10 - boxW, y: label.y + 8 },
+          { x: label.x - boxW / 2, y: label.y - boxH - 13 },
+          { x: label.x - boxW / 2, y: label.y + 13 },
+        ].map((candidate) => ({
+          x: Math.max(4, Math.min(w - boxW - 4, candidate.x)),
+          y: Math.max(4, Math.min(h - boxH - 4, candidate.y)),
+          w: boxW,
+          h: boxH,
+        }))
+
+        const chosen =
+          candidates.find((candidate) => !placed.some((other) => overlaps(candidate, other))) ??
+          (label.emphasis ? candidates[0] : null)
+        if (!chosen) continue
+        placed.push(chosen)
+
+        const labelCx = chosen.x + chosen.w / 2
+        const labelCy = chosen.y + chosen.h / 2
+        if (Math.hypot(labelCx - label.x, labelCy - label.y) > 28) {
+          ctx.strokeStyle = `rgba(232,214,160,${label.emphasis ? 0.45 : 0.18})`
+          ctx.lineWidth = 1
+          ctx.beginPath()
+          ctx.moveTo(label.x, label.y)
+          ctx.lineTo(labelCx, labelCy)
+          ctx.stroke()
+        }
+
+        roundRect(chosen.x, chosen.y, chosen.w, chosen.h, 6)
+        if (label.isHub) {
+          ctx.fillStyle = 'rgba(232,214,160,0.96)'
+          ctx.strokeStyle = 'rgba(255,236,190,0.95)'
+        } else if (label.emphasis) {
+          ctx.fillStyle = 'rgba(10,26,58,0.95)'
+          ctx.strokeStyle = 'rgba(232,214,160,0.8)'
+        } else {
+          ctx.fillStyle = 'rgba(6,15,34,0.78)'
+          ctx.strokeStyle = `rgba(232,214,160,${0.16 + label.z * 0.26})`
+        }
+        ctx.fill()
+        ctx.lineWidth = 1
+        ctx.stroke()
+
+        ctx.fillStyle = label.isHub
+          ? '#0a1a3a'
+          : label.emphasis
+            ? 'rgba(232,214,160,1)'
+            : `rgba(240,235,220,${0.72 + label.z * 0.26})`
+        ctx.textAlign = 'left'
+        ctx.textBaseline = 'middle'
+        ctx.fillText(label.city, chosen.x + padX, chosen.y + chosen.h / 2 + 0.5)
       }
       hitRef.current = hits
     }
@@ -343,6 +448,14 @@ export default function Globe({ offices, hub, selectedId, onSelect, className }:
     const resizeObserver = new ResizeObserver(resize)
     resizeObserver.observe(wrap)
     resize()
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        if (w > 0) {
+          measureLabels()
+          draw(performance.now())
+        }
+      })
+    }
 
     raf = requestAnimationFrame(loop)
     canvas.addEventListener('pointerdown', onDown)

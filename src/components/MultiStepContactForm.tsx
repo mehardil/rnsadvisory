@@ -183,7 +183,7 @@ export default function MultiStepContactForm() {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="p-6 md:p-8" noValidate>
-        <div className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+        <div className="sr-only" aria-hidden="true">
           <label htmlFor="website-hp">Website</label>
           <input id="website-hp" tabIndex={-1} autoComplete="off" {...register('website')} />
         </div>
@@ -202,7 +202,7 @@ export default function MultiStepContactForm() {
                 <label htmlFor="contact-phone" className="field-label">
                   {t('form.phone')}
                 </label>
-                <input id="contact-phone" type="tel" className="input" autoComplete="tel" placeholder="+92 331 905 1913" {...register('phone')} />
+                <input id="contact-phone" type="tel" className="input" autoComplete="tel" placeholder="+971 55 539 6858" {...register('phone')} />
                 {errors.phone && <p className="field-error">{errors.phone.message}</p>}
               </div>
             </div>

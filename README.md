@@ -296,9 +296,9 @@ docs/             Design system, architecture, content guide, build log
 
 ## Contact details used across the site
 
-- Phone / WhatsApp: **+92 331 905 1913**
-- Email: **mehardil13302@gmail.com**
-- WhatsApp deep link: `https://wa.me/923319051913`
+- Phone / WhatsApp: **+971 55 539 6858**
+- Email: **advisor@rnsglobalpartner.com**
+- WhatsApp deep link: `https://wa.me/971555396858`
 - Working hours: Monday–Saturday, 09:00–19:00 GST
 
 Both are centralised in `src/config/siteConfig.js`.

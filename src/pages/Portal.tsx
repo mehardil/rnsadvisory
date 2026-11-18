@@ -339,7 +339,7 @@ export default function Portal() {
                 <p className="text-[0.74rem] text-muted">
                   <strong className="text-ink">Demo notice:</strong> this dashboard uses sample data and does not store files or messages.
                 </p>
-                <a href="https://wa.me/923319051913" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-sm">
+                <a href="https://wa.me/971555396858" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-sm">
                   <MessageCircle size={13} /> Message on WhatsApp
                 </a>
               </div>

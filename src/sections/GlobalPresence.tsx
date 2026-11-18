@@ -149,7 +149,7 @@ export default function GlobalPresence() {
                     Contact office <ArrowRight size={12} />
                   </Link>
                   <a
-                    href="tel:+923319051913"
+                    href="tel:+971555396858"
                     className="inline-flex items-center justify-center gap-1.5 rounded-full border border-ivory/20 px-3 py-2.5 text-[0.72rem] font-medium text-ivory/70 transition-colors hover:border-gold hover:text-softgold"
                   >
                     <Phone size={12} /> Call

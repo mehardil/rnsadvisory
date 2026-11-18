@@ -98,7 +98,7 @@ function BookingSection() {
           </div>
           <div>
             <label htmlFor="book-phone" className="field-label">Phone / WhatsApp</label>
-            <input id="book-phone" type="tel" value={phone} onChange={(event) => setPhone(event.target.value)} className="input" autoComplete="tel" placeholder="+92 331 905 1913" />
+            <input id="book-phone" type="tel" value={phone} onChange={(event) => setPhone(event.target.value)} className="input" autoComplete="tel" placeholder="+971 55 539 6858" />
           </div>
           <div>
             <label htmlFor="book-service" className="field-label">Topic</label>
