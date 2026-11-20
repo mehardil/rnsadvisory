@@ -572,20 +572,6 @@ body::after {
   }
 }
 
-/* Utility: hide the native cursor only where a custom cursor is active. */
-@media (hover: hover) and (pointer: fine) {
-  .cursor-none-desktop,
-  .cursor-none-desktop a,
-  .cursor-none-desktop button {
-    cursor: none;
-  }
-  .cursor-none-desktop input,
-  .cursor-none-desktop textarea,
-  .cursor-none-desktop select {
-    cursor: auto;
-  }
-}
-
 /* Marquee pauses on hover. */
 .marquee-track:hover {
   animation-play-state: paused;

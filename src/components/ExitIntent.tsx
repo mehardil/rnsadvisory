@@ -19,25 +19,30 @@ export default function ExitIntent() {
 
   useEffect(() => {
     if (readSession('rns-lead-prompt-seen', false)) return
-    const markSeen = () => writeSession('rns-lead-prompt-seen', true)
 
-    const onLeave = (event: MouseEvent) => {
-      if (event.clientY <= 0) {
-        setOpen(true)
-        markSeen()
-      }
-    }
+    let shown = false
+    let timer = 0
 
-    const timer = window.setTimeout(() => {
-      setOpen(true)
-      markSeen()
-    }, 30_000)
-
-    document.addEventListener('mouseleave', onLeave)
-    return () => {
+    function removeTriggers() {
       document.removeEventListener('mouseleave', onLeave)
       window.clearTimeout(timer)
     }
+
+    function show() {
+      if (shown) return
+      shown = true
+      writeSession('rns-lead-prompt-seen', true)
+      removeTriggers()
+      setOpen(true)
+    }
+
+    function onLeave(event: MouseEvent) {
+      if (event.clientY <= 0) show()
+    }
+
+    timer = window.setTimeout(show, 30_000)
+    document.addEventListener('mouseleave', onLeave)
+    return removeTriggers
   }, [])
 
   const close = () => setOpen(false)

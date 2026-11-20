@@ -9,7 +9,6 @@ import ChatWidget from '@/components/ChatWidget'
 import CookieConsent from '@/components/CookieConsent'
 import CommandPalette from '@/components/CommandPalette'
 import Toaster from '@/components/Toaster'
-import CustomCursor from '@/components/CustomCursor'
 import ScrollProgress from '@/components/ScrollProgress'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import RouteFallback from '@/components/RouteFallback'
@@ -65,7 +64,6 @@ export default function Layout() {
       <CookieConsent />
       <CommandPalette />
       <Toaster />
-      <CustomCursor />
     </div>
   )
 }
