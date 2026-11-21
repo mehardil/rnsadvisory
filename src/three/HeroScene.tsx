@@ -1,7 +1,6 @@
 import { Suspense, useMemo, useRef } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Float } from '@react-three/drei'
-import { Bloom, EffectComposer } from '@react-three/postprocessing'
 import * as THREE from 'three'
 import { usePrefersReducedMotion } from '@/hooks/useMediaQuery'
 
@@ -26,7 +25,7 @@ function Globe() {
   })
 
   const particles = useMemo(() => {
-    const count = 900
+    const count = 520
     const positions = new Float32Array(count * 3)
     for (let i = 0; i < count; i++) {
       const r = 2.15 + Math.random() * 1.5
@@ -119,9 +118,6 @@ function Scene() {
       <directionalLight position={[4, 5, 6]} intensity={2.1} color="#cfe0ff" />
       <pointLight position={[-5, -2, 3]} intensity={18} color="#C9A24B" distance={14} />
       <Globe />
-      <EffectComposer multisampling={4}>
-        <Bloom intensity={0.55} luminanceThreshold={0.28} luminanceSmoothing={0.4} mipmapBlur />
-      </EffectComposer>
     </>
   )
 }
@@ -130,10 +126,10 @@ export default function HeroScene() {
   const reduced = usePrefersReducedMotion()
   return (
     <Canvas
-      dpr={[1, 2]}
+      dpr={[1, 1.5]}
       frameloop={reduced ? 'demand' : 'always'}
       camera={{ position: [0, 0, 6], fov: 42 }}
-      gl={{ antialias: true, powerPreference: 'high-performance', alpha: true }}
+      gl={{ antialias: false, powerPreference: 'high-performance', alpha: true }}
       style={{ pointerEvents: 'none' }}
       aria-hidden="true"
     >

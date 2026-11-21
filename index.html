@@ -8,13 +8,8 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin />
 
     <script>
       // Apply the saved theme before paint to avoid a flash of the wrong surface.
@@ -27,6 +22,50 @@
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- First-paint shell: the same hero copy painted from static HTML so the
+         LCP text appears before the React bundle executes. It is fixed (so it
+         never shifts layout), hidden from assistive tech, and removed as soon
+         as the app mounts. -->
+    <div id="boot-hero" aria-hidden="true">
+      <section class="relative isolate min-h-[100svh] overflow-hidden bg-navy text-ivory">
+        <div class="absolute inset-0 bg-gradient-to-r from-navy via-navy/65 to-transparent"></div>
+        <div class="container-x relative z-10 flex min-h-[100svh] flex-col justify-center pb-24 pt-32 md:pt-36">
+          <div class="grid items-center gap-12 lg:grid-cols-12">
+            <div class="lg:col-span-7">
+              <div class="flex flex-wrap items-center gap-3">
+                <span class="inline-flex items-center gap-2 rounded-full border border-softgold/25 bg-ivory/[0.04] px-3.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-softgold backdrop-blur">
+                  <span class="h-1.5 w-1.5 rounded-full bg-gold"></span>
+                  Fastest advisory · Since 2011
+                </span>
+              </div>
+              <h1 class="mt-7 font-display text-[clamp(3.1rem,7.4vw,6.2rem)] font-medium leading-[0.95] tracking-[-0.04em] text-ivory">
+                Expertise <br class="hidden sm:block" />
+                Without
+                <em class="relative inline-block italic text-softgold">Borders.</em>
+              </h1>
+              <p class="mt-5 inline-flex items-center gap-3 text-[0.92rem] font-medium leading-snug text-softgold md:text-[1.02rem]">
+                <span class="h-px w-8 shrink-0 bg-gold/70"></span>
+                Fastest advisory · One consultant · Trusted for life.
+              </p>
+              <p class="mt-5 max-w-xl text-[0.98rem] leading-relaxed text-ivory/65 md:text-[1.08rem]">
+                Education. Travel. Business. Finance. Legal. Technology. One trusted partner across 8 regions.
+              </p>
+              <div class="mt-9 flex flex-wrap items-center gap-3">
+                <a class="btn btn-gold px-7 py-4 text-[0.95rem] w-full justify-center sm:w-auto" href="/services">Explore services</a>
+                <a class="btn btn-light-outline px-7 py-4 text-[0.95rem] w-full justify-center sm:w-auto" href="/contact">Book a consultation</a>
+              </div>
+              <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-ivory/10 pt-6 text-[0.7rem] text-ivory/45">
+                <span class="inline-flex items-center gap-2">
+                  <span class="h-1 w-1 rounded-full bg-gold"></span>
+                  Trusted by students, founders, families and boards in 8 regions
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
     <div id="root"></div>
     <noscript>
       RNS Global Partners — Expertise Without Borders. Please enable JavaScript to view the interactive site, or call

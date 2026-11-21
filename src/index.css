@@ -3,6 +3,84 @@
 @tailwind utilities;
 
 /* ==========================================================================
+   Self-hosted variable fonts — same families Google Fonts served, but served
+   from our own origin so the CSS is no longer render-blocking and the two
+   most critical cuts can be preloaded. Latin + Latin-ext only.
+   ========================================================================== */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/inter-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/playfair-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/playfair-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/playfair-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/playfair-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/jetbrains-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/jetbrains-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ==========================================================================
    RNS Global Partners — Design tokens
    Semantic variables let every surface adapt to dark mode without per-class
    dark: variants, which keeps the CSS small and the palette consistent.
@@ -70,7 +148,6 @@ body {
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
 
@@ -109,7 +186,8 @@ body::after {
   z-index: 60;
   pointer-events: none;
   opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-image: url("data:image/png;base64,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");
+  background-size: 140px 140px;
 }
 
 /* Mobile: skip the full-screen grain layer and its paint cost. */
@@ -844,4 +922,123 @@ body::after {
   .iso-scene {
     display: none !important;
   }
+}
+
+/* ==========================================================================
+   Scroll/entrance reveals — CSS-only so framer-motion never sits on the
+   critical path. The IO toggles `.is-visible`; reduced-motion shows instantly.
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-y, 26px), 0);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.22, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-group .reveal {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 0.7, 0.2, 1),
+    transform 0.55s cubic-bezier(0.22, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-group.is-visible .reveal {
+  opacity: 1;
+  transform: none;
+}
+.reveal-group.is-visible > .reveal:nth-child(2) {
+  transition-delay: calc(var(--reveal-delay, 0ms) + 70ms);
+}
+.reveal-group.is-visible > .reveal:nth-child(3) {
+  transition-delay: calc(var(--reveal-delay, 0ms) + 140ms);
+}
+.reveal-group.is-visible > .reveal:nth-child(n + 4) {
+  transition-delay: calc(var(--reveal-delay, 0ms) + 210ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-group .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Lightweight entrance animations (CSS-only, no runtime library).
+   ========================================================================== */
+@keyframes page-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes anim-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes anim-fade-up {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes anim-slide-in {
+  from { opacity: 0; transform: translate3d(14px, 0, 0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes anim-pop {
+  from { opacity: 0; transform: translate3d(0, 12px, 0) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes anim-drop {
+  from { opacity: 0; transform: translate3d(0, -8px, 0); }
+  to { opacity: 1; transform: none; }
+}
+.page-fade { animation: page-fade 0.3s ease-out both; }
+.anim-fade { animation: anim-fade 0.2s ease-out both; }
+.anim-fade-up { animation: anim-fade-up 0.35s cubic-bezier(0.22, 0.7, 0.2, 1) both; }
+.anim-slide-in { animation: anim-slide-in 0.25s cubic-bezier(0.22, 0.7, 0.2, 1) both; }
+.anim-pop { animation: anim-pop 0.22s cubic-bezier(0.22, 0.7, 0.2, 1) both; }
+.anim-drop { animation: anim-drop 0.22s ease-out both; }
+
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.3s cubic-bezier(0.22, 0.7, 0.2, 1), opacity 0.25s ease;
+}
+.accordion-panel.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-fade,
+  .anim-fade,
+  .anim-fade-up,
+  .anim-slide-in,
+  .anim-pop,
+  .anim-drop {
+    animation: none !important;
+  }
+  .accordion-panel {
+    transition: none;
+  }
+}
+
+/* Static first-paint hero shell (see index.html). Fixed so removing it never
+   shifts layout; the app paints above it and it is removed after mount. */
+#boot-hero {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: #10264f;
+  pointer-events: none;
+}
+#root {
+  position: relative;
+  z-index: 1;
 }

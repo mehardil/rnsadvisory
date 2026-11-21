@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ard.specification.org/schema/v1/manifest.json",
+  "version": "1.0",
+  "name": "RNS Global Partners",
+  "description": "A one-stop global advisory and consultancy firm covering immigration, education, business setup, finance, legal and trade across eight regions.",
+  "url": "https://rnsglobalpartners.com/",
+  "contact": {
+    "email": "hello@rnsglobalpartners.com",
+    "telephone": "+971555396858"
+  },
+  "resources": [
+    {
+      "name": "Services",
+      "url": "https://rnsglobalpartners.com/services",
+      "type": "service-catalog"
+    },
+    {
+      "name": "Insights",
+      "url": "https://rnsglobalpartners.com/insights",
+      "type": "articles"
+    },
+    {
+      "name": "Tools",
+      "url": "https://rnsglobalpartners.com/tools",
+      "type": "application"
+    },
+    {
+      "name": "Contact",
+      "url": "https://rnsglobalpartners.com/contact",
+      "type": "contact"
+    }
+  ]
+}

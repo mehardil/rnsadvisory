@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Briefcase, Building2, Check, Compass, GraduationCap, HeartHandshake, RotateCcw, Sparkles, Users } from 'lucide-react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { serviceCategories } from '@/data/services'
 import { ButtonLink } from '@/components/Button'
 import ArtFrame from '@/components/ArtFrame'
@@ -118,14 +117,7 @@ export default function ServiceFinder() {
             </div>
 
             <div className="p-5 md:p-7">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={step}
-                  initial={{ opacity: 0, x: 14 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -14 }}
-                  transition={{ duration: 0.22 }}
-                >
+                <div key={step} className="anim-slide-in">
                   {step === 0 && (
                     <>
                       <h3 className="font-display text-2xl text-ink">First, who are we helping?</h3>
@@ -251,8 +243,7 @@ export default function ServiceFinder() {
                       </p>
                     </div>
                   )}
-                </motion.div>
-              </AnimatePresence>
+                </div>
             </div>
           </div>
         </div>

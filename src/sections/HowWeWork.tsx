@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { usePrefersReducedMotion } from '@/hooks/useMediaQuery'
 import SectionHeading from '@/components/SectionHeading'
 import Reveal from '@/components/Reveal'
@@ -17,9 +17,31 @@ export default function HowWeWork() {
   const lineRef = useRef<HTMLDivElement | null>(null)
   const wrapRef = useRef<HTMLDivElement | null>(null)
   const reduced = usePrefersReducedMotion()
+  const [inView, setInView] = useState(false)
+
+  // Only pull GSAP in when this section actually approaches the viewport.
+  useEffect(() => {
+    const node = wrapRef.current
+    if (!node || reduced) return
+    if (typeof IntersectionObserver === 'undefined') {
+      setInView(true)
+      return
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setInView(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '300px' },
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [reduced])
 
   useEffect(() => {
-    if (reduced) return
+    if (reduced || !inView) return
     let ctx: { revert: () => void } | null = null
     let cancelled = false
 
@@ -60,7 +82,7 @@ export default function HowWeWork() {
       cancelled = true
       ctx?.revert()
     }
-  }, [reduced])
+  }, [reduced, inView])
 
   return (
     <section className="relative bg-page py-20 md:py-28">

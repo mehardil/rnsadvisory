@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, LayoutGrid } from 'lucide-react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { serviceCategories, featuredServices } from '@/data/services'
 import SectionHeading from '@/components/SectionHeading'
 import ServiceOrbit from '@/components/ServiceOrbit'
@@ -94,14 +93,9 @@ export default function WhatWeDo() {
           </div>
         </Reveal>
 
-        <AnimatePresence mode="wait">
-          <motion.div
+          <div
             key={active}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.28 }}
-            className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+            className="anim-fade-up mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
           >
             {services.map((service) => (
               <ServiceCard
@@ -111,8 +105,7 @@ export default function WhatWeDo() {
                 animate={false}
               />
             ))}
-          </motion.div>
-        </AnimatePresence>
+          </div>
 
         <div className="mt-8 flex justify-center">
           <Link to="/services" className="link-underline text-sm">

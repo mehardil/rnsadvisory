@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowUpRight, Briefcase, Building2, Clock, Compass, FileText, MapPin, Search, X, type LucideIcon } from 'lucide-react'
 import { useUIStore } from '@/store/useUIStore'
 import { searchItems } from '@/utils/search'
@@ -73,24 +72,17 @@ export default function CommandPalette() {
   }
 
   return (
-    <AnimatePresence>
+    <>
       {open && (
-        <motion.div
-          className="fixed inset-0 z-[130] flex items-start justify-center bg-navy/70 p-4 pt-[10vh] backdrop-blur-sm md:pt-[14vh]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+        <div
+          className="anim-fade fixed inset-0 z-[130] flex items-start justify-center bg-navy/70 p-4 pt-[10vh] backdrop-blur-sm md:pt-[14vh]"
           onClick={() => setOpen(false)}
           role="dialog"
           aria-modal="true"
           aria-label="Search RNS Global Partners"
         >
-          <motion.div
-            className="w-full max-w-2xl overflow-hidden rounded-2xl border border-ivory/15 bg-[color:var(--surface)] shadow-lift"
-            initial={{ opacity: 0, y: -12, scale: 0.985 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.985 }}
-            transition={{ duration: 0.2 }}
+          <div
+            className="anim-pop w-full max-w-2xl overflow-hidden rounded-2xl border border-ivory/15 bg-[color:var(--surface)] shadow-lift"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="flex items-center gap-3 border-b border-[color:var(--hair)] px-4 py-3.5">
@@ -166,9 +158,9 @@ export default function CommandPalette() {
                 to close
               </span>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       )}
-    </AnimatePresence>
+    </>
   )
 }

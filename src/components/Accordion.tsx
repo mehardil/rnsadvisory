@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Minus, Plus } from 'lucide-react'
 import { cn } from '@/utils/cn'
 
@@ -20,7 +19,6 @@ export default function Accordion({
   tone?: 'light' | 'dark'
 }) {
   const [open, setOpen] = useState<number | null>(defaultOpen)
-  const reduced = useReducedMotion()
 
   return (
     <div className={cn('divide-y', tone === 'dark' ? 'divide-ivory/15' : 'divide-[color:var(--hair)]', className)}>
@@ -53,25 +51,19 @@ export default function Accordion({
                 </span>
               </button>
             </h3>
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  key="content"
-                  id={`faq-panel-${index}`}
-                  role="region"
-                  aria-labelledby={`faq-button-${index}`}
-                  initial={reduced ? undefined : { height: 0, opacity: 0 }}
-                  animate={reduced ? undefined : { height: 'auto', opacity: 1 }}
-                  exit={reduced ? undefined : { height: 0, opacity: 0 }}
-                  transition={{ duration: 0.35, ease: [0.22, 0.7, 0.2, 1] }}
-                  className="overflow-hidden"
-                >
-                  <p className={cn('max-w-3xl pb-7 pr-10 text-[0.94rem] leading-relaxed', tone === 'dark' ? 'text-ivory/65' : 'text-muted')}>
-                    {item.a}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <div
+              id={`faq-panel-${index}`}
+              role="region"
+              aria-labelledby={`faq-button-${index}`}
+              aria-hidden={!isOpen}
+              className={cn('accordion-panel', isOpen && 'is-open')}
+            >
+              <div className="min-h-0 overflow-hidden">
+                <p className={cn('max-w-3xl pb-7 pr-10 text-[0.94rem] leading-relaxed', tone === 'dark' ? 'text-ivory/65' : 'text-muted')}>
+                  {item.a}
+                </p>
+              </div>
+            </div>
           </div>
         )
       })}

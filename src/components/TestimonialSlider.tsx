@@ -1,13 +1,13 @@
 import { Quote, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { usePrefersReducedMotion } from '@/hooks/useMediaQuery'
 import { testimonials } from '@/data/testimonials'
 import { cn } from '@/utils/cn'
 
 export default function TestimonialSlider() {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
-  const reduced = useReducedMotion()
+  const reduced = usePrefersReducedMotion()
 
   useEffect(() => {
     if (paused || reduced) return
@@ -28,14 +28,7 @@ export default function TestimonialSlider() {
       <div className="card relative overflow-hidden p-7 md:p-12">
         <Quote className="absolute right-6 top-6 h-16 w-16 text-gold/10 md:right-10 md:top-10 md:h-24 md:w-24" aria-hidden="true" />
         <div aria-live="polite" className="relative min-h-[250px] md:min-h-[210px]">
-          <AnimatePresence mode="wait">
-            <motion.figure
-              key={current.id}
-              initial={reduced ? undefined : { opacity: 0, y: 14 }}
-              animate={reduced ? undefined : { opacity: 1, y: 0 }}
-              exit={reduced ? undefined : { opacity: 0, y: -10 }}
-              transition={{ duration: 0.4, ease: [0.22, 0.7, 0.2, 1] }}
-            >
+            <figure key={current.id} className="anim-fade-up">
               <blockquote className="max-w-3xl font-display text-[1.35rem] leading-[1.5] text-ink md:text-[1.72rem]">
                 “{current.quote}”
               </blockquote>
@@ -57,8 +50,7 @@ export default function TestimonialSlider() {
                 </span>
                 <span className="rounded-full bg-[color:var(--surface-2)] px-3 py-1.5 mono-label !text-[9px]">{current.service}</span>
               </figcaption>
-            </motion.figure>
-          </AnimatePresence>
+            </figure>
         </div>
 
         <div className="mt-8 flex items-center justify-between border-t border-[color:var(--hair)] pt-5">

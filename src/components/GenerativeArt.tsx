@@ -534,7 +534,9 @@ export default function GenerativeArt({
       canvas.style.width = `${width}px`
       canvas.style.height = `${height}px`
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      draw(performance.now())
+      // Offscreen artwork is painted lazily on first intersection instead of
+      // during the initial mount.
+      if (visible) draw(performance.now())
     }
 
     const draw = (now: number) => {
@@ -605,7 +607,9 @@ export default function GenerativeArt({
 
     const observer = new IntersectionObserver(
       (entries) => {
-        visible = entries[0].isIntersecting
+        const next = entries[0].isIntersecting
+        if (next && !visible && !animate) draw(performance.now())
+        visible = next
       },
       { rootMargin: '120px' },
     )
@@ -618,8 +622,6 @@ export default function GenerativeArt({
     if (animate && !reduced) {
       frame = requestAnimationFrame(loop)
       window.addEventListener('pointermove', onPointerMove, { passive: true })
-    } else {
-      draw(0)
     }
 
     return () => {

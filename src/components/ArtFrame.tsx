@@ -50,7 +50,8 @@ export default function ArtFrame({
   const [failed, setFailed] = useState(false)
   const imgRef = useRef<HTMLImageElement | null>(null)
   const imageExists = useHasGeneratedImage(imageKey)
-  const showImage = Boolean(imageKey) && imageExists && !failed
+  // Priority art (hero backgrounds) must not wait for the manifest round-trip.
+  const showImage = Boolean(imageKey) && (priority || imageExists) && !failed
   const isCard = /^(service|industry|article|tool|case|team)-/.test(imageKey || '')
   const srcSet = showImage
     ? `/generated/${imageKey}-sm.webp 900w, /generated/${imageKey}.webp ${isCard ? 1200 : 2000}w`

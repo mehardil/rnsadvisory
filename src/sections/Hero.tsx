@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { ArrowDown, ArrowRight, CalendarCheck, Star } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import siteConfig from '@/config/siteConfig'
@@ -6,17 +6,40 @@ import ArtFrame from '@/components/ArtFrame'
 import { ButtonAnchor, ButtonLink } from '@/components/Button'
 import { consultationLink } from '@/utils/links'
 import Reveal from '@/components/Reveal'
-import { useIsLowEnd } from '@/hooks/useMediaQuery'
+import { useIsDesktop, useIsLowEnd } from '@/hooks/useMediaQuery'
 
 const HeroScene = lazy(() => import('@/three/HeroScene'))
 
 export default function Hero() {
   const { t } = useTranslation()
   const lowEnd = useIsLowEnd()
+  const isDesktop = useIsDesktop()
+  const [sceneReady, setSceneReady] = useState(false)
+  const [artReady, setArtReady] = useState(false)
+
+  // Paint the copy first, then mount the background artwork on the next frame
+  // so the hero text never waits on the canvas/image work.
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setArtReady(true))
+    return () => cancelAnimationFrame(id)
+  }, [])
+
+  // The WebGL globe is a decorative enhancement. Mount it only after the user
+  // interacts, so it can never block the first paint, the LCP or input latency
+  // (software WebGL in particular is extremely expensive).
+  useEffect(() => {
+    if (lowEnd) return
+    const activate = () => setSceneReady(true)
+    const events = ['pointermove', 'pointerdown', 'scroll', 'keydown', 'touchstart'] as const
+    for (const event of events) window.addEventListener(event, activate, { once: true, passive: true })
+    return () => {
+      for (const event of events) window.removeEventListener(event, activate)
+    }
+  }, [lowEnd])
 
   return (
     <section className="relative isolate min-h-[100svh] overflow-hidden bg-navy text-ivory">
-      {!lowEnd && (
+      {!lowEnd && artReady && (
         <ArtFrame
           seed="home-hero-aurora"
           imageKey="home-hero-aurora"
@@ -30,15 +53,15 @@ export default function Hero() {
         />
       )}
 
-      {!lowEnd && (
-        <div className="absolute inset-0 md:left-[32%]">
+      {!lowEnd && sceneReady && (
+        <div className="anim-fade absolute inset-0 md:left-[32%]">
           <Suspense fallback={null}>
             <HeroScene />
           </Suspense>
         </div>
       )}
 
-      {lowEnd && (
+      {lowEnd && artReady && (
         <ArtFrame
           seed="home-hero-mobile"
           imageKey="home-hero-mobile"
@@ -136,7 +159,8 @@ export default function Hero() {
             </Reveal>
           </div>
 
-          <div className="hidden lg:col-span-5 lg:block" aria-hidden="true">
+          {isDesktop && (
+          <div className="lg:col-span-5" aria-hidden="true">
             <div className="relative ml-auto mt-40 w-full max-w-[300px]">
               <div className="glass-dark rounded-2xl p-5">
                 <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-softgold">One firm · Eight regions</p>
@@ -162,6 +186,7 @@ export default function Hero() {
               </div>
             </div>
           </div>
+          )}
         </div>
 
         <div className="absolute inset-x-0 bottom-5 hidden items-center justify-between border-t border-ivory/10 pt-5 md:flex">

@@ -1,4 +1,5 @@
 import Seo from '@/components/Seo'
+import DeferredSection from '@/components/DeferredSection'
 import ExitIntent from '@/components/ExitIntent'
 import Hero from '@/sections/Hero'
 import PromiseStrip from '@/sections/PromiseStrip'
@@ -29,20 +30,22 @@ export default function Home() {
         jsonLd={[organizationJsonLd(), websiteJsonLd(), faqJsonLd(homeFaqs)]}
       />
       <Hero />
-      <PromiseStrip />
-      <TrustStrip />
-      <WhatWeDo />
-      <ServiceFinder />
-      <GlobalPresence />
-      <HowWeWork />
-      <IndustriesSection />
-      <CaseStudiesSection />
-      <WhyUs />
-      <TestimonialsSection />
-      <InsightsSection />
-      <NewsletterSection />
-      <FaqSection />
-      <FinalCta />
+      <DeferredSection rootMargin="0px 0px -15% 0px">
+        <PromiseStrip />
+        <TrustStrip />
+        <WhatWeDo />
+        <ServiceFinder />
+        <GlobalPresence />
+        <HowWeWork />
+        <IndustriesSection />
+        <CaseStudiesSection />
+        <WhyUs />
+        <TestimonialsSection />
+        <InsightsSection />
+        <NewsletterSection />
+        <FaqSection />
+        <FinalCta />
+      </DeferredSection>
       <ExitIntent />
     </>
   )

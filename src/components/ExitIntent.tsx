@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, CalendarCheck, CheckCircle2, Loader2, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useUIStore } from '@/store/useUIStore'
@@ -63,24 +62,17 @@ export default function ExitIntent() {
   }
 
   return (
-    <AnimatePresence>
+    <>
       {open && (
-        <motion.div
-          className="fixed inset-0 z-[125] flex items-center justify-center bg-navy/70 p-4 backdrop-blur-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+        <div
+          className="anim-fade fixed inset-0 z-[125] flex items-center justify-center bg-navy/70 p-4 backdrop-blur-sm"
           onClick={close}
           role="dialog"
           aria-modal="true"
           aria-label="Free consultation"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 24, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.98 }}
-            transition={{ duration: 0.28 }}
-            className="relative w-full max-w-3xl overflow-hidden rounded-2xl border border-ivory/15 bg-[color:var(--surface)] shadow-lift"
+          <div
+            className="anim-pop relative w-full max-w-3xl overflow-hidden rounded-2xl border border-ivory/15 bg-[color:var(--surface)] shadow-lift"
             onClick={(event) => event.stopPropagation()}
           >
             <button
@@ -159,9 +151,9 @@ export default function ExitIntent() {
                 )}
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       )}
-    </AnimatePresence>
+    </>
   )
 }

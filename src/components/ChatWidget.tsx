@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowUpRight, MessageCircle, Send, Sparkles, X } from 'lucide-react'
 import { cn } from '@/utils/cn'
 import { whatsappLink } from '@/utils/links'
@@ -93,14 +92,9 @@ export default function ChatWidget() {
 
   return (
     <>
-      <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 16, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.97 }}
-            transition={{ duration: 0.2 }}
-            className="fixed bottom-36 right-4 z-[110] flex h-[min(520px,70vh)] w-[min(380px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-[color:var(--hair)] bg-[color:var(--surface)] shadow-lift md:bottom-24 md:right-6"
+          <div
+            className="anim-pop fixed bottom-36 right-4 z-[110] flex h-[min(520px,70vh)] w-[min(380px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-[color:var(--hair)] bg-[color:var(--surface)] shadow-lift md:bottom-24 md:right-6"
             role="dialog"
             aria-label="RNS Partners Assistant"
           >
@@ -197,9 +191,8 @@ export default function ChatWidget() {
                 </a>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
 
       <button
         type="button"

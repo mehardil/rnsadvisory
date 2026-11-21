@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
 import {
   ArrowRight,
   ChevronDown,
@@ -21,19 +20,27 @@ import {
 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import siteConfig from '@/config/siteConfig'
-import { serviceCategories } from '@/data/services'
 import { useUIStore } from '@/store/useUIStore'
 import { useHeaderBehaviour } from '@/hooks/useHeaderBehaviour'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useScrollLock } from '@/hooks/useInteractions'
 import { whatsappLink, mailLink, phoneLink, consultationLink } from '@/utils/links'
 import { getIcon } from '@/utils/icons'
 import { cn } from '@/utils/cn'
 import Logo from './Logo'
-import ArtFrame from './ArtFrame'
+const ArtFrame = lazy(() => import('./ArtFrame'))
 import { MetaIcon, WhatsAppIcon } from './SocialIcons'
 import { ButtonAnchor } from './Button'
 
-const featuredService = serviceCategories.find((c) => c.slug === 'immigration')?.services.find((s) => s.slug === 'golden-visa')
+type NavService = { slug: string; title: string }
+type NavCategory = {
+  id: string
+  slug: string
+  title: string
+  short: string
+  icon: string
+  services: NavService[]
+}
 
 export default function Header() {
   const { t, i18n } = useTranslation()
@@ -42,8 +49,17 @@ export default function Header() {
   const [megaOpen, setMegaOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openCategory, setOpenCategory] = useState<string | null>(null)
+  // The full services catalogue is only needed once a menu opens, so it stays
+  // out of the initial bundle.
+  const [serviceCategories, setServiceCategories] = useState<NavCategory[]>([])
   const closeTimer = useRef<number>()
   const { hidden, scrolled } = useHeaderBehaviour()
+  // Render breakpoint-only chrome only when it can actually be seen; this keeps
+  // the mobile DOM (and its mount cost) much smaller.
+  const isSm = useMediaQuery('(min-width: 640px)')
+  const isMd = useMediaQuery('(min-width: 768px)')
+  const isLg = useMediaQuery('(min-width: 1024px)')
+  const isXl = useMediaQuery('(min-width: 1280px)')
   const theme = useUIStore((s) => s.theme)
   const toggleTheme = useUIStore((s) => s.toggleTheme)
   const setPaletteOpen = useUIStore((s) => s.setPaletteOpen)
@@ -57,7 +73,24 @@ export default function Header() {
   const solid = scrolled || megaOpen
   const lightText = !solid
   const primaryCategories = serviceCategories.slice(0, 6)
+  const featuredService = serviceCategories
+    .find((c) => c.slug === 'immigration')
+    ?.services.find((s) => s.slug === 'golden-visa')
   const socialHref = (id: string) => siteConfig.socials.find((social) => social.id === id)?.href ?? '#'
+
+  useEffect(() => {
+    if (!megaOpen && !mobileOpen) return
+    if (serviceCategories.length) return
+    let alive = true
+    import('@/data/services')
+      .then((mod) => {
+        if (alive) setServiceCategories(mod.serviceCategories as NavCategory[])
+      })
+      .catch(() => {})
+    return () => {
+      alive = false
+    }
+  }, [megaOpen, mobileOpen, serviceCategories.length])
 
   useEffect(() => {
     setMegaOpen(false)
@@ -114,7 +147,8 @@ export default function Header() {
         hidden && !megaOpen ? '-translate-y-full' : 'translate-y-0',
       )}
     >
-      <div className="relative z-10 hidden border-b border-ivory/10 bg-navy md:block">
+      {isMd && (
+      <div className="relative z-10 border-b border-ivory/10 bg-navy">
         <div className="container-x flex h-9 items-center justify-between gap-4 text-[0.68rem] text-ivory/60">
           <div className="flex min-w-0 items-center gap-4">
             <a href={mailLink()} className="inline-flex items-center gap-1.5 truncate transition-colors hover:text-softgold">
@@ -182,6 +216,7 @@ export default function Header() {
           </div>
         </div>
       </div>
+      )}
 
       {showAnnouncement && !scrolled && (
         <div className="relative bg-gold text-navy">
@@ -225,7 +260,8 @@ export default function Header() {
             <Logo tone={lightText ? 'light' : 'dark'} />
           </div>
 
-          <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
+          {isXl && (
+          <nav className="flex items-center gap-0.5" aria-label="Primary">
             {siteConfig.nav.map((item) =>
               item.mega ? (
                 <button
@@ -261,6 +297,7 @@ export default function Header() {
               ),
             )}
           </nav>
+          )}
 
           <div className="ms-auto flex items-center gap-1 sm:gap-1.5">
             <button
@@ -274,18 +311,20 @@ export default function Header() {
             >
               <Search size={17} />
             </button>
+            {isSm && (
             <button
               type="button"
               onClick={toggleLang}
               aria-label={t('a11y.toggleLang')}
               className={cn(
-                'hidden h-9 items-center gap-1 rounded-full px-2.5 font-mono text-[10px] font-medium uppercase tracking-wider transition-colors sm:flex',
+                'flex h-9 items-center gap-1 rounded-full px-2.5 font-mono text-[10px] font-medium uppercase tracking-wider transition-colors',
                 lightText ? 'text-ivory/75 hover:bg-ivory/10 hover:text-ivory' : 'text-muted hover:bg-[color:var(--surface-2)] hover:text-ink',
               )}
             >
               <Globe size={13} />
               {i18n.language?.startsWith('ar') ? 'AR' : 'EN'}
             </button>
+            )}
             <button
               type="button"
               onClick={toggleTheme}
@@ -297,7 +336,8 @@ export default function Header() {
             >
               {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
             </button>
-            <div className="hidden lg:block">
+            {isLg && (
+            <div className="block">
               <ButtonAnchor
                 href={consultationLink()}
                 target="_blank"
@@ -309,6 +349,7 @@ export default function Header() {
                 {t('cta.bookShort')}
               </ButtonAnchor>
             </div>
+            )}
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
@@ -325,15 +366,10 @@ export default function Header() {
         </div>
 
         {/* Mega menu */}
-        <AnimatePresence>
-          {megaOpen && (
-            <motion.div
+        {megaOpen && (
+            <div
               id="services-mega"
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.22 }}
-              className="absolute inset-x-0 top-full hidden border-t border-[color:var(--hair)] bg-[color:var(--surface)] shadow-lift xl:block"
+              className="anim-drop absolute inset-x-0 top-full hidden border-t border-[color:var(--hair)] bg-[color:var(--surface)] shadow-lift xl:block"
               onMouseEnter={openMega}
             >
               <div className="container-x py-7">
@@ -382,15 +418,17 @@ export default function Header() {
                         className="group card block overflow-hidden !rounded-xl"
                       >
                         <div className="relative h-36 overflow-hidden">
-                          <ArtFrame
-                            seed="mega-golden-visa"
-                            imageKey="service-immigration-golden-visa"
-                            style="crystals"
-                            alt="UAE Golden Visa advisory"
-                            animate
-                            rounded="rounded-none"
-                            className="h-full w-full transition-transform duration-700 group-hover:scale-105"
-                          />
+                          <Suspense fallback={<span className="block h-full w-full bg-navy" />}>
+                            <ArtFrame
+                              seed="mega-golden-visa"
+                              imageKey="service-immigration-golden-visa"
+                              style="crystals"
+                              alt="UAE Golden Visa advisory"
+                              animate
+                              rounded="rounded-none"
+                              className="h-full w-full transition-transform duration-700 group-hover:scale-105"
+                            />
+                          </Suspense>
                           <span className="absolute left-3 top-3 rounded-full bg-navy/70 px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.16em] text-softgold backdrop-blur">
                             {t('nav.featured')}
                           </span>
@@ -430,21 +468,16 @@ export default function Header() {
                   </Link>
                 </div>
               </div>
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
       </div>
 
       {/* Mobile menu — rendered in a portal so the header's transform cannot clip it */}
       {typeof document !== 'undefined' &&
         createPortal(
-          <AnimatePresence>
-            {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[140] flex h-[100dvh] flex-col bg-navy text-ivory xl:hidden"
+          mobileOpen && (
+          <div
+            className="anim-fade fixed inset-0 z-[140] flex h-[100dvh] flex-col bg-navy text-ivory xl:hidden"
           >
             <div className="container-x flex h-[78px] shrink-0 items-center justify-between border-b border-ivory/10">
               <Logo tone="light" />
@@ -475,14 +508,9 @@ export default function Header() {
                           className={cn('transition-transform text-softgold', openCategory !== null && 'rotate-180')}
                         />
                       </button>
-                      <AnimatePresence initial={false}>
-                        {openCategory !== null && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="overflow-hidden"
-                          >
+                      {openCategory !== null && (
+                          <div className="overflow-hidden">
+
                             <div className="space-y-1 pb-4">
                               {serviceCategories.map((category) => {
                                 const Icon = getIcon(category.icon)
@@ -527,9 +555,8 @@ export default function Header() {
                                 {t('nav.allServices')} <ArrowRight size={13} />
                               </Link>
                             </div>
-                          </motion.div>
+                          </div>
                         )}
-                      </AnimatePresence>
                     </div>
                   ) : (
                     <NavLink
@@ -597,9 +624,8 @@ export default function Header() {
                 </a>
               </div>
             </div>
-          </motion.div>
-            )}
-          </AnimatePresence>,
+          </div>
+          ),
           document.body,
         )}
     </header>

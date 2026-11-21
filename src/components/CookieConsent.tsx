@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Cookie, Settings2, X } from 'lucide-react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { useUIStore } from '@/store/useUIStore'
 import { initAnalytics } from '@/utils/analytics'
 import { cn } from '@/utils/cn'
@@ -23,14 +22,10 @@ export default function CookieConsent() {
   const visible = !consent.decided && !hidden
 
   return (
-    <AnimatePresence>
+    <>
       {visible && (
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 24 }}
-          transition={{ duration: 0.35 }}
-          className="fixed bottom-[4.75rem] left-3 right-3 z-[115] md:bottom-6 md:left-6 md:right-auto md:max-w-[390px]"
+        <div
+          className="anim-fade-up fixed bottom-[4.75rem] left-3 right-3 z-[115] md:bottom-6 md:left-6 md:right-auto md:max-w-[390px]"
           role="region"
           aria-label="Cookie preferences"
         >
@@ -55,14 +50,8 @@ export default function CookieConsent() {
               </button>
             </div>
 
-            <AnimatePresence initial={false}>
               {showPrefs && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  className="overflow-hidden"
-                >
+                <div className="overflow-hidden">
                   <div className="space-y-3 border-t border-[color:var(--hair)] px-5 py-4">
                     <div className="flex items-start justify-between gap-4">
                       <div>
@@ -86,9 +75,8 @@ export default function CookieConsent() {
                       <input type="checkbox" checked={marketing} onChange={(e) => setMarketing(e.target.checked)} className="mt-1 h-4 w-4 accent-[#C9A24B]" />
                     </label>
                   </div>
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
 
             <div className="flex flex-wrap items-center gap-1.5 border-t border-[color:var(--hair)] bg-[color:var(--surface-2)] px-3 py-2.5 md:px-4 md:py-3">
               <Button size="sm" variant="gold" onClick={() => decide({ analytics: true, marketing: true })}>
@@ -115,8 +103,8 @@ export default function CookieConsent() {
               </a>
             </div>
           </div>
-        </motion.div>
+        </div>
       )}
-    </AnimatePresence>
+    </>
   )
 }
